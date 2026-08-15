@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <title>NULVA — 생체연구시설</title>
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/app.css">
+
+</head>
+
+
+<body>
+
+<main id="game">
+
+
+    <!-- ========================================
+         BOOT SCREEN
+    ========================================= -->
+
+    <section
+        id="boot-screen"
+        class="screen boot-screen"
+    >
+
+        <div class="boot-content">
+
+            <div class="boot-kicker">
+                NULVA INTERNAL SYSTEM
+            </div>
+
+
+            <div
+                id="boot-lines"
+                class="boot-lines"
+            ></div>
+
+
+            <div
+                id="boot-logo"
+                class="boot-logo hidden"
+            >
+
+                <h1>NULVA</h1>
+
+                <p>
+                    BIOLOGICAL RESEARCH FACILITY
+                </p>
+
+                <button
+                    id="boot-start"
+                    class="primary-button"
+                >
+                    SYSTEM START
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================
+     RESEARCHER ID
+========================================= -->
+
+<section
+    id="researcher-screen"
+    class="screen researcher-screen hidden"
+>
+
+    <div class="nulva-researcher-overlay">
+
+        <div
+            class="nulva-researcher-window"
+        >
+
+            <!-- HEADER -->
+
+            <div class="nulva-researcher-header">
+
+                <div class="nulva-researcher-system">
+
+                    NULVA INTERNAL SYSTEM
+
+                </div>
+
+                <div class="nulva-researcher-status">
+
+                    PERSONNEL ACCESS
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTENT -->
+
+            <div class="nulva-researcher-content">
+
+                <div class="nulva-researcher-kicker">
+
+                    RESEARCHER AUTHENTICATION
+
+                </div>
+
+
+                <h2>
+
+                    연구원 ID를 입력하세요
+
+                </h2>
+
+
+                <p>
+
+                    연구 및 실험체 관리 기록에
+                    당신의 ID가 등록됩니다.
+
+                </p>
+
+
+                <!-- INPUT -->
+
+                <div class="nulva-researcher-input-wrap">
+
+                    <div class="nulva-researcher-input-label">
+
+                        RESEARCHER ID
+
+                    </div>
+
+
+                    <input
+                        id="researcher-id"
+                        type="text"
+                        maxlength="18"
+                        autocomplete="off"
+                        placeholder="RESEARCHER ID"
+                    >
+
+                </div>
+
+
+                <!-- CONFIRM -->
+
+                <div class="nulva-researcher-actions">
+
+                    <button
+                        id="researcher-confirm"
+                        class="primary-button nulva-researcher-confirm"
+                    >
+
+                        CONFIRM
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <div class="nulva-researcher-footer">
+
+                <span>
+
+                    NULVA PERSONNEL SYSTEM
+
+                </span>
+
+
+                <span>
+
+                    AUTHORIZATION REQUIRED
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+    <!-- ========================================
+         MAIN LAB
+    ========================================= -->
+
+    <section
+        id="lab-screen"
+        class="screen lab-screen hidden"
+    >
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="brand">
+
+                <strong>NULVA</strong>
+
+                <span>
+                    / BIOLOGICAL RESEARCH FACILITY
+                </span>
+
+            </div>
+
+
+            <div class="top-status">
+
+                <span>
+                    DAY
+                    <b id="day-label">
+                        01
+                    </b>
+                </span>
+
+                <span>
+                    TIME
+                    <b id="time-label">
+                        08:10
+                    </b>
+                </span>
+
+                <span>
+                    ACTION
+                    <b id="action-label">
+                        3 / 3
+                    </b>
+                </span>
+
+                <span class="facility-status">
+
+                    <i></i>
+
+                    NORMAL
+
+                </span>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- MAIN -->
+
+        <div class="main-grid">
+
+
+            <!-- =================================
+                 LEFT · SUBJECTS
+            ================================= -->
+
+            <aside
+                class="subject-panel panel"
+            >
+
+                <div class="panel-title">
+                    SUBJECTS
+                </div>
+
+
+                <div id="subject-list"></div>
+
+            </aside>
+
+
+
+            <!-- =================================
+                 CENTER · LAB
+            ================================= -->
+
+            <section
+                class="lab-view panel"
+            >
+
+                <div class="camera-label">
+
+                    CAM-01
+
+                    <span>
+                        ● LIVE
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="camera-warning"
+                    class="camera-warning hidden"
+                >
+                    SIGNAL ANOMALY · 이상 신호 감지
+                </div>
+
+
+                <div class="chamber">
+
+
+                    <!-- 천장 조명 -->
+
+                    <div class="ceiling-light"></div>
+
+
+                    <!-- 유리 반사 -->
+
+                    <div class="glass-reflection"></div>
+
+
+                    <!-- 유리 격자 -->
+
+                    <div class="glass-lines"></div>
+
+
+                    <!-- 벽면 장비 -->
+
+                    <div class="wall-panel wall-panel-left"></div>
+
+                    <div class="wall-panel wall-panel-right"></div>
+
+
+                    <!-- 바닥 -->
+
+                    <div class="floor-grid"></div>
+
+
+                    <!-- MIRA -->
+
+                    <div
+                        id="mira"
+                        class="mira"
+                    >
+
+                        <div class="mira-glow"></div>
+
+                        <div class="mira-head"></div>
+
+                        <div class="mira-body"></div>
+
+                        <div class="mira-leg left"></div>
+
+                        <div class="mira-leg right"></div>
+
+                    </div>
+
+
+                    <!-- 관찰 카메라 -->
+
+                    <div class="observation-camera">
+
+                        <span class="camera-lens"></span>
+
+                        <span class="camera-led"></span>
+
+                    </div>
+
+
+                    <!-- 격리실 번호 -->
+
+                    <div class="chamber-label">
+
+                        CONTAINMENT 01
+
+                    </div>
+
+
+                    <!-- 시스템 데이터 -->
+
+                    <div class="chamber-data">
+
+                        <span>CAM-01</span>
+
+                        <span>SEC-03</span>
+
+                        <span>LIVE</span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- 환경 정보 -->
+
+                <div class="environment">
+
+                    <span>
+                        TEMP
+                        <b>21.4°C</b>
+                    </span>
+
+                    <span>
+                        HUMIDITY
+                        <b>54%</b>
+                    </span>
+
+                    <span>
+                        LIGHT
+                        <b>38%</b>
+                    </span>
+
+                    <span>
+                        NOISE
+                        <b>12 dB</b>
+                    </span>
+
+                </div>
+
+
+                <!-- 관찰 기록 -->
+
+                <div
+                    id="observation-note"
+                    class="observation-note"
+                >
+                    실험체 001은 현재
+                    연구실 내부를 관찰하고 있다.
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================
+                 RIGHT · SUBJECT STATUS
+            ================================= -->
+
+            <aside
+                class="status-panel panel"
+            >
+
+
+                <div class="subject-heading">
+
+                    <div>
+
+                        <div class="eyebrow">
+
+                            SUBJECT-001
+
+                        </div>
+
+
+                        <h2>
+                            MIRA
+                        </h2>
+
+
+                        <p>
+                            ADAPTIVE ORGANISM
+                            · 적응형 개체
+                        </p>
+
+                    </div>
+
+
+                    <span
+                        id="subject-state"
+                        class="state-pill"
+                    >
+                        호기심
+                    </span>
+
+                </div>
+
+
+
+                <!-- STATS -->
+
+                <div id="stats"></div>
+
+
+
+                <!-- LAST ACTIVITY -->
+
+                <div class="last-activity">
+
+                    <div class="eyebrow">
+                        LAST ACTIVITY
+                    </div>
+
+                    <p
+                        id="last-activity"
+                        class="story-text"
+                    >
+                        미라는 연구원을
+                        약 03:17 동안 관찰했다.
+                    </p>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+
+
+        <!-- =================================
+             ACTION BAR
+        ================================= -->
+
+        <div class="action-bar">
+
+
+            <button data-action="observe">
+
+                <b>
+                    OBSERVE
+                </b>
+
+                <small>
+                    1 AP
+                </small>
+
+            </button>
+
+
+            <button data-action="feed">
+
+                <b>
+                    FEED
+                </b>
+
+                <small>
+                    1 AP
+                </small>
+
+            </button>
+
+
+            <button data-action="talk">
+
+                <b>
+                    TALK
+                </b>
+
+                <small>
+                    1 AP
+                </small>
+
+            </button>
+
+
+            <button
+                data-action="experiment"
+                class="locked"
+            >
+
+                <b>
+                    EXPERIMENT
+                </b>
+
+                <small>
+                    LOCKED
+                </small>
+
+            </button>
+
+
+            <button data-action="memory">
+
+                <b>
+                    MEMORY
+                </b>
+
+                <small>
+                    DATA
+                </small>
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================
+             BOTTOM NAV
+        ================================= -->
+
+        <nav class="bottom-nav">
+
+            <span class="active">
+                연구
+            </span>
+
+            <span>
+                실험체
+            </span>
+
+            <span>
+                기록
+            </span>
+
+            <span>
+                데이터
+            </span>
+
+            <span class="locked-nav">
+                보안
+            </span>
+
+            <span>
+                시스템
+            </span>
+
+            <span class="nav-save">
+                AUTOSAVE
+            </span>
+
+        </nav>
+
+    </section>
+
+
+
+    <!-- ========================================
+         MODAL
+    ========================================= -->
+
+    <div
+        id="modal"
+        class="modal hidden"
+    >
+
+        <div class="modal-content">
+
+            <div
+                id="modal-kicker"
+                class="eyebrow"
+            ></div>
+
+            <h2 id="modal-title"></h2>
+
+            <div id="modal-body"></div>
+
+            <div
+                id="modal-actions"
+                class="modal-actions"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- TOAST -->
+
+    <div
+        id="toast"
+        class="toast hidden"
+    ></div>
+
+
+</main>
+
+<script src="./js/gameViewport.js"></script>
+<script src="js/state.js"></script>
+<script src="js/subjects/MIRAstats.js"></script>
+<script src="js/subjects/MIRAobserve.js"></script>
+<script src="js/subjects/MIRAactions.js"></script>
+<script src="js/subjects/MIRAanomaly.js"></script>
+<script src="js/subjects/MIRAday02.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+
+</html>

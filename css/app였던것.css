@@ -1,0 +1,10397 @@
+/* =========================================================
+   NULVA
+   app.css
+   PART 1 / 5
+   전체 삭제 후 여기부터 순서대로 붙여넣기
+========================================================= */
+
+
+/* =========================================================
+   FONT
+========================================================= */
+
+@import url(
+    'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&family=VT323&display=swap'
+);
+
+
+@font-face {
+
+    font-family:
+        "NULVA Korean Pixel";
+
+    src:
+        url("../fonts/neodgm.woff2")
+        format("woff2");
+
+    font-weight:
+        400;
+
+    font-style:
+        normal;
+
+    font-display:
+        swap;
+
+}
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+    --bg:
+        #030609;
+
+    --panel:
+        #080d13;
+
+    --panel-dark:
+        #05090e;
+
+    --line:
+        #172a3a;
+
+    --line-bright:
+        #23435b;
+
+    --text:
+        #d8e7f2;
+
+    --muted:
+        #718899;
+
+    --blue:
+        #4c9fff;
+
+    --blue-bright:
+        #72c9ff;
+
+    --blue-dark:
+        #173a5a;
+
+    --warning:
+        #c49a55;
+
+    --danger:
+        #a85e6b;
+
+    --ok:
+        #6fa88e;
+
+
+    --font-digital:
+        "VT323",
+        monospace;
+
+    --font-korean-pixel:
+        "NULVA Korean Pixel",
+        sans-serif;
+
+    --font-logo:
+        "Space Grotesk",
+        sans-serif;
+
+    --font-readable:
+        "NULVA Korean Pixel",
+        sans-serif;
+
+
+    /* S25+ 가로 기준 게임 좌표 */
+
+    --game-width:
+        2340px;
+
+    --game-height:
+        1080px;
+
+    --game-scale:
+        1;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+html,
+body {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    overflow:
+        hidden;
+
+    background:
+        var(--bg);
+
+    color:
+        var(--text);
+
+    font-family:
+        var(--font-readable);
+
+    font-size:
+        16px;
+
+}
+
+
+*,
+*::before,
+*::after {
+
+    box-sizing:
+        border-box;
+
+}
+
+
+button,
+input,
+textarea {
+
+    font:
+        inherit;
+
+}
+
+
+button {
+
+    cursor:
+        pointer;
+
+    user-select:
+        none;
+
+    -webkit-user-select:
+        none;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+}
+
+
+button,
+input {
+
+    -webkit-appearance:
+        none;
+
+    appearance:
+        none;
+
+}
+
+
+button:focus,
+input:focus,
+textarea:focus {
+
+    outline:
+        none;
+
+}
+
+
+.hidden {
+
+    display:
+        none !important;
+
+}
+
+
+/* =========================================================
+   GAME ROOT
+========================================================= */
+
+#game {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    width:
+        100vw;
+
+    height:
+        100dvh;
+
+    overflow:
+        hidden;
+
+    background:
+        #030609;
+
+    user-select:
+        none;
+
+    -webkit-user-select:
+        none;
+
+}
+
+
+/* =========================================================
+   FIXED S25+ LANDSCAPE CANVAS
+========================================================= */
+
+.screen {
+
+    position:
+        absolute;
+
+    top:
+        50%;
+
+    left:
+        50%;
+
+    width:
+        2340px;
+
+    height:
+        1080px;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        )
+        scale(
+            var(--game-scale)
+        );
+
+    transform-origin:
+        center center;
+
+    overflow:
+        hidden;
+
+    will-change:
+        transform;
+
+}
+
+
+/* =========================================================
+   PORTRAIT WARNING
+========================================================= */
+
+@media (
+    orientation: portrait
+) {
+
+    #game::before {
+
+        content:
+            "PLEASE ROTATE YOUR DEVICE";
+
+        position:
+            fixed;
+
+        inset:
+            0;
+
+        z-index:
+            9999;
+
+        display:
+            grid;
+
+        place-items:
+            center;
+
+        background:
+            #030609;
+
+        color:
+            var(--text);
+
+        font-family:
+            var(--font-logo);
+
+        font-size:
+            24px;
+
+        font-weight:
+            500;
+
+        letter-spacing:
+            .14em;
+
+        text-align:
+            center;
+
+    }
+
+
+    #game::after {
+
+        content:
+            "NULVA / LANDSCAPE MODE";
+
+        position:
+            fixed;
+
+        top:
+            calc(
+                50% + 42px
+            );
+
+        left:
+            50%;
+
+        z-index:
+            10000;
+
+        transform:
+            translateX(-50%);
+
+        color:
+            var(--muted);
+
+        font-family:
+            var(--font-digital);
+
+        font-size:
+            20px;
+
+        letter-spacing:
+            .12em;
+
+        white-space:
+            nowrap;
+
+    }
+
+
+    .screen {
+
+        pointer-events:
+            none;
+
+    }
+
+}
+
+
+/* =========================================================
+   BOOT / RESEARCHER BACKGROUND
+========================================================= */
+
+.boot-screen,
+.researcher-screen {
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 45%,
+            #0b1b2b 0%,
+            #050b12 35%,
+            #030609 70%,
+            #010204 100%
+        );
+
+}
+
+/* =========================================================
+   BOOT CONTENT
+========================================================= */
+
+.boot-content {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    max-width:
+        none;
+
+    text-align:
+        center;
+
+}
+
+
+/* =========================================================
+   BOOT TERMINAL
+   좌측 상단
+========================================================= */
+
+.boot-kicker {
+
+    position:
+        absolute;
+
+    top:
+        38px;
+
+    left:
+        78px;
+
+    z-index:
+        20;
+
+    width:
+        max-content;
+
+    transform:
+        none;
+
+    color:
+        #60798b;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        30px;
+
+    letter-spacing:
+        .14em;
+
+}
+
+
+.boot-lines {
+
+    position:
+        absolute;
+
+    top:
+        86px;
+
+    left:
+        78px;
+
+    z-index:
+        20;
+
+    width:
+        1000px;
+
+    min-height:
+        0;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    text-align:
+        left;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        36px;
+
+    line-height:
+        1.55;
+
+    letter-spacing:
+        .04em;
+
+    white-space:
+        pre-wrap;
+
+}
+
+
+.boot-lines > div {
+
+    min-height:
+        1.25em;
+
+}
+
+
+.boot-lines .korean-system {
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        31px;
+
+    line-height:
+        1.7;
+
+    letter-spacing:
+        0;
+
+    color:
+        #d0dfe7;
+
+}
+
+
+/* =========================================================
+   BOOT CURSOR
+========================================================= */
+
+.boot-lines > div.typing::after {
+
+    content:
+        "█";
+
+    display:
+        inline-block;
+
+    margin-left:
+        4px;
+
+    color:
+        #d0dfe7;
+
+    animation:
+        nulva-terminal-cursor
+        .5s
+        steps(1)
+        infinite;
+
+}
+
+
+@keyframes nulva-terminal-cursor {
+
+    0%,
+    49% {
+
+        opacity:
+            1;
+
+    }
+
+    50%,
+    100% {
+
+        opacity:
+            0;
+
+    }
+
+}
+
+
+/* =========================================================
+   BOOT LOGO
+========================================================= */
+
+.boot-logo {
+
+    position:
+        absolute;
+
+    top:
+        50%;
+
+    left:
+        50%;
+
+    width:
+        max-content;
+
+    max-width:
+        90%;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    text-align:
+        center;
+
+}
+
+
+.boot-logo h1 {
+
+    margin:
+        0;
+
+    color:
+        #e1edf5;
+
+    font-family:
+        var(--font-logo);
+
+    font-size:
+        150px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        .22em;
+
+    line-height:
+        .95;
+
+    transform:
+        translateX(
+            .11em
+        );
+
+    text-shadow:
+
+        0 0 10px
+        rgba(
+            76,
+            159,
+            255,
+            .14
+        ),
+
+        0 0 30px
+        rgba(
+            76,
+            159,
+            255,
+            .05
+        );
+
+}
+
+
+.boot-logo p {
+
+    margin:
+        22px 0 0;
+
+    color:
+        #7890a0;
+
+    font-family:
+        var(--font-readable);
+
+    font-size:
+        22px;
+
+    line-height:
+        1.7;
+
+    letter-spacing:
+        .12em;
+
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.primary-button {
+
+    margin-top:
+        38px;
+
+    min-height:
+        68px;
+
+    padding:
+        17px 44px;
+
+    border:
+        1px solid
+        #28547a;
+
+    background:
+        #081522;
+
+    color:
+        var(--text);
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        29px;
+
+    letter-spacing:
+        .12em;
+
+    box-shadow:
+
+        inset 0 0 20px
+        rgba(
+            30,
+            100,
+            160,
+            .04
+        );
+
+    transition:
+
+        border-color .15s,
+        background .15s,
+        box-shadow .15s;
+
+}
+
+
+.primary-button:hover {
+
+    border-color:
+        var(--blue);
+
+    background:
+        #0b1a29;
+
+}
+
+
+.primary-button:active {
+
+    background:
+        #102237;
+
+    transform:
+        translateY(1px);
+
+}
+
+
+/* =========================================================
+   RESEARCHER PANEL
+========================================================= */
+
+.researcher-panel {
+
+    width:
+        760px;
+
+    max-width:
+        82%;
+
+    padding:
+        58px;
+
+    border:
+        1px solid
+        var(--line);
+
+    background:
+        rgba(
+            16,
+            22,
+            25,
+            .94
+        );
+
+    box-shadow:
+
+        0 0 40px
+        rgba(
+            0,
+            0,
+            0,
+            .28
+        );
+
+}
+
+
+.researcher-panel h2 {
+
+    margin:
+        10px 0 0;
+
+    color:
+        #d7e4ec;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        48px;
+
+    font-weight:
+        400;
+
+    line-height:
+        1.6;
+
+}
+
+
+.researcher-panel p {
+
+    margin:
+        16px 0 0;
+
+    color:
+        var(--muted);
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        25px;
+
+    line-height:
+        1.8;
+
+}
+
+
+.researcher-panel input {
+
+    width:
+        100%;
+
+    margin-top:
+        30px;
+
+    padding:
+        19px;
+
+    border:
+        1px solid
+        var(--line);
+
+    background:
+        #0a0f11;
+
+    color:
+        var(--text);
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        36px;
+
+    letter-spacing:
+        .12em;
+
+    caret-color:
+        var(--blue-bright);
+
+}
+
+
+.researcher-panel input::placeholder {
+
+    color:
+        #405462;
+
+    opacity:
+        1;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        29px;
+
+}
+
+
+.researcher-panel button {
+
+    margin-top:
+        26px;
+
+    min-width:
+        180px;
+
+    min-height:
+        64px;
+
+    padding:
+        15px 30px;
+
+    border:
+        1px solid
+        #28547a;
+
+    background:
+        #081522;
+
+    color:
+        #c7d8e3;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        30px;
+
+    letter-spacing:
+        .12em;
+
+}
+
+/* =========================================================
+   NULVA
+   app.css
+   PART 2 / 5
+   LAB SCREEN + TOP BAR + MAIN GRID
+========================================================= */
+
+
+/* =========================================================
+   LAB SCREEN
+========================================================= */
+
+.lab-screen {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    background:
+        var(--bg);
+
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar {
+
+    height:
+        88px;
+
+    min-height:
+        88px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        0 30px;
+
+    gap:
+        20px;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    background:
+        #04080d;
+
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+
+    min-width:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        baseline;
+
+    gap:
+        16px;
+
+    color:
+        var(--muted);
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        21px;
+
+    letter-spacing:
+        .08em;
+
+}
+
+
+.brand strong {
+
+    flex-shrink:
+        0;
+
+    color:
+        #e1edf5;
+
+    font-family:
+        var(--font-logo);
+
+    font-size:
+        34px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        .24em;
+
+    line-height:
+        1;
+
+    transform:
+        translateX(
+            .12em
+        );
+
+}
+
+
+.brand span {
+
+    min-width:
+        0;
+
+    overflow:
+        hidden;
+
+    text-overflow:
+        ellipsis;
+
+    white-space:
+        nowrap;
+
+    color:
+        #60788a;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        20px;
+
+}
+
+
+/* =========================================================
+   TOP STATUS
+========================================================= */
+
+.top-status {
+
+    min-width:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        flex-end;
+
+    gap:
+        30px;
+
+    color:
+        var(--muted);
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        24px;
+
+    white-space:
+        nowrap;
+
+}
+
+
+.top-status span {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+}
+
+
+.top-status b {
+
+    color:
+        var(--text);
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        29px;
+
+    font-weight:
+        400;
+
+}
+
+
+/* =========================================================
+   FACILITY STATUS LIGHT
+========================================================= */
+
+.facility-status i {
+
+    display:
+        inline-block;
+
+    width:
+        9px;
+
+    height:
+        9px;
+
+    margin-right:
+        7px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--blue);
+
+    box-shadow:
+
+        0 0 8px
+        rgba(
+            76,
+            159,
+            255,
+            .65
+        );
+
+}
+
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.main-grid {
+
+    flex:
+        1 1 auto;
+
+    min-width:
+        0;
+
+    min-height:
+        0;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        18%
+        60%
+        22%;
+
+    gap:
+        1px;
+
+    overflow:
+        hidden;
+
+    background:
+        var(--line);
+
+}
+
+
+/* =========================================================
+   GENERIC PANEL
+========================================================= */
+
+.panel {
+
+    min-width:
+        0;
+
+    min-height:
+        0;
+
+    overflow:
+        hidden;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #0a1017,
+            #070c11
+        );
+
+}
+
+
+/* =========================================================
+   SUBJECT PANEL
+========================================================= */
+
+.subject-panel {
+
+    min-width:
+        0;
+
+    min-height:
+        0;
+
+    padding:
+        28px;
+
+    overflow:
+        auto;
+
+    scrollbar-width:
+        thin;
+
+    scrollbar-color:
+        #1b3447
+        transparent;
+
+}
+
+
+/* =========================================================
+   STATUS PANEL
+========================================================= */
+
+.status-panel {
+
+    min-width:
+        0;
+
+    min-height:
+        0;
+
+    padding:
+        28px;
+
+    overflow:
+        auto;
+
+    scrollbar-width:
+        thin;
+
+    scrollbar-color:
+        #1b3447
+        transparent;
+
+}
+
+
+/* =========================================================
+   PANEL SCROLLBAR
+========================================================= */
+
+.subject-panel::-webkit-scrollbar,
+.status-panel::-webkit-scrollbar {
+
+    width:
+        5px;
+
+}
+
+
+.subject-panel::-webkit-scrollbar-track,
+.status-panel::-webkit-scrollbar-track {
+
+    background:
+        transparent;
+
+}
+
+
+.subject-panel::-webkit-scrollbar-thumb,
+.status-panel::-webkit-scrollbar-thumb {
+
+    background:
+        #1b3447;
+
+}
+
+
+/* =========================================================
+   PANEL TITLE
+========================================================= */
+
+.panel-title {
+
+    margin:
+        0 0 22px;
+
+    color:
+        #718899;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        26px;
+
+    letter-spacing:
+        .16em;
+
+}
+
+
+/* =========================================================
+   SUBJECT CARD
+========================================================= */
+
+.subject-card {
+
+    width:
+        100%;
+
+    min-height:
+        112px;
+
+    box-sizing:
+        border-box;
+
+    margin:
+        0 0 12px;
+
+    padding:
+        21px 19px;
+
+    border:
+        1px solid
+        transparent;
+
+    background:
+        #0d1315;
+
+    color:
+        var(--text);
+
+    text-align:
+        left;
+
+    touch-action:
+        manipulation;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+    transition:
+
+        border-color .15s,
+        background .15s,
+        box-shadow .15s,
+        transform .08s;
+
+}
+
+
+/* =========================================================
+   SUBJECT CARD ACTIVE
+========================================================= */
+
+.subject-card.active {
+
+    border-color:
+        #28547a;
+
+    background:
+        #0b1722;
+
+    box-shadow:
+
+        inset 4px 0 0
+        var(--blue);
+
+}
+
+
+/* =========================================================
+   SUBJECT CARD HOVER
+========================================================= */
+
+.subject-card:hover {
+
+    border-color:
+        #1c3b53;
+
+    background:
+        #0e1821;
+
+}
+
+
+/* =========================================================
+   SUBJECT CARD ID
+========================================================= */
+
+.subject-card .id {
+
+    color:
+        var(--muted);
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        25px;
+
+    letter-spacing:
+        .06em;
+
+}
+
+
+/* =========================================================
+   SUBJECT CARD NAME
+========================================================= */
+
+.subject-card h3 {
+
+    margin:
+        8px 0 10px;
+
+    color:
+        #dce9f1;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        34px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        .04em;
+
+    line-height:
+        1.05;
+
+}
+
+
+/* =========================================================
+   SUBJECT CARD STATUS
+========================================================= */
+
+.subject-card p {
+
+    margin:
+        0;
+
+    color:
+        var(--muted);
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        22px;
+
+    line-height:
+        1.6;
+
+}
+
+
+/* =========================================================
+   STATUS DOT
+========================================================= */
+
+.dot {
+
+    display:
+        inline-block;
+
+    width:
+        8px;
+
+    height:
+        8px;
+
+    margin-right:
+        7px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--ok);
+
+    box-shadow:
+
+        0 0 7px
+        rgba(
+            111,
+            168,
+            142,
+            .35
+        );
+
+}
+
+
+/* =========================================================
+   LAB VIEW
+========================================================= */
+
+.lab-view {
+
+    position:
+        relative;
+
+    min-width:
+        0;
+
+    min-height:
+        0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    overflow:
+        hidden;
+
+    background:
+
+        linear-gradient(
+            #11191b,
+            #0b1012
+        );
+
+}
+
+
+/* =========================================================
+   LAB VIEW VIGNETTE
+========================================================= */
+
+.lab-view::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        9;
+
+    pointer-events:
+        none;
+
+    background:
+
+        radial-gradient(
+            ellipse at center,
+            transparent 45%,
+            rgba(
+                0,
+                0,
+                0,
+                .28
+            ) 100%
+        );
+
+}
+
+
+/* =========================================================
+   LAB VIEW SCANLINE
+========================================================= */
+
+.lab-view::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        10;
+
+    pointer-events:
+        none;
+
+    background:
+
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 3px,
+            rgba(
+                114,
+                201,
+                255,
+                .018
+            ) 4px
+        );
+
+    opacity:
+        .5;
+
+}
+
+
+/* =========================================================
+   CAMERA LABEL
+========================================================= */
+
+.camera-label {
+
+    position:
+        absolute;
+
+    top:
+        22px;
+
+    left:
+        26px;
+
+    z-index:
+        5;
+
+    color:
+        var(--muted);
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        24px;
+
+    letter-spacing:
+        .08em;
+
+}
+
+
+.camera-label span {
+
+    margin-left:
+        10px;
+
+    color:
+        var(--blue-bright);
+
+    text-shadow:
+
+        0 0 8px
+        rgba(
+            114,
+            201,
+            255,
+            .35
+        );
+
+}
+
+
+.camera-label small {
+
+    margin-left:
+        10px;
+
+    color:
+        #46657a;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        20px;
+
+}
+
+
+/* =========================================================
+   CAMERA WARNING
+========================================================= */
+
+.camera-warning {
+
+    position:
+        absolute;
+
+    top:
+        68px;
+
+    left:
+        50%;
+
+    z-index:
+        20;
+
+    transform:
+        translateX(-50%);
+
+    padding:
+        9px 18px;
+
+    border:
+        1px solid
+        rgba(
+            196,
+            154,
+            85,
+            .45
+        );
+
+    background:
+        rgba(
+            18,
+            15,
+            10,
+            .82
+        );
+
+    color:
+        var(--warning);
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        22px;
+
+    letter-spacing:
+        .10em;
+
+    box-shadow:
+
+        0 0 14px
+        rgba(
+            196,
+            154,
+            85,
+            .08
+        );
+
+}
+
+/* =========================================================
+   NULVA
+   app.css
+   PART 3 / 5
+   CHAMBER + MIRA + SUBJECT STATUS
+========================================================= */
+
+
+/* =========================================================
+   CHAMBER
+========================================================= */
+
+.chamber {
+
+    position:
+        relative;
+
+    width:
+        78%;
+
+    height:
+        72%;
+
+    min-width:
+        420px;
+
+    min-height:
+        300px;
+
+    max-width:
+        860px;
+
+    max-height:
+        520px;
+
+    overflow:
+        hidden;
+
+    border:
+        1px solid
+        #29495e;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #1a272b 0%,
+            #10191d 42%,
+            #080d10 100%
+        );
+
+    box-shadow:
+
+        0 0 0 1px
+        rgba(
+            255,
+            255,
+            255,
+            .02
+        ),
+
+        inset 0 0 50px
+        rgba(
+            0,
+            0,
+            0,
+            .55
+        ),
+
+        0 0 35px
+        rgba(
+            76,
+            159,
+            255,
+            .04
+        );
+
+}
+
+
+/* =========================================================
+   CHAMBER GLASS
+========================================================= */
+
+.chamber::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        4;
+
+    pointer-events:
+        none;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(
+                255,
+                255,
+                255,
+                .035
+            ),
+            transparent 14%,
+            transparent 84%,
+            rgba(
+                255,
+                255,
+                255,
+                .018
+            )
+        );
+
+}
+
+
+/* =========================================================
+   CEILING LIGHT
+========================================================= */
+
+.ceiling-light {
+
+    position:
+        absolute;
+
+    top:
+        14px;
+
+    left:
+        50%;
+
+    width:
+        38%;
+
+    height:
+        4px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        #c7dbe3;
+
+    box-shadow:
+
+        0 0 10px
+        rgba(
+            199,
+            219,
+            227,
+            .30
+        ),
+
+        0 0 35px
+        rgba(
+            76,
+            159,
+            255,
+            .08
+        );
+
+}
+
+
+/* =========================================================
+   GLASS REFLECTION
+========================================================= */
+
+.glass-reflection {
+
+    position:
+        absolute;
+
+    top:
+        -15%;
+
+    left:
+        8%;
+
+    width:
+        18%;
+
+    height:
+        130%;
+
+    transform:
+        rotate(
+            12deg
+        );
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(
+                210,
+                230,
+                238,
+                .035
+            ),
+            transparent
+        );
+
+    pointer-events:
+        none;
+
+}
+
+
+/* =========================================================
+   GLASS GRID
+========================================================= */
+
+.glass-lines {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        2;
+
+    pointer-events:
+        none;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent 24.8%,
+            rgba(
+                138,
+                173,
+                190,
+                .055
+            ) 25%,
+            transparent 25.2%,
+            transparent 49.8%,
+            rgba(
+                138,
+                173,
+                190,
+                .055
+            ) 50%,
+            transparent 50.2%,
+            transparent 74.8%,
+            rgba(
+                138,
+                173,
+                190,
+                .055
+            ) 75%,
+            transparent 75.2%
+        ),
+
+        linear-gradient(
+            0deg,
+            transparent 24.8%,
+            rgba(
+                138,
+                173,
+                190,
+                .045
+            ) 25%,
+            transparent 25.2%,
+            transparent 49.8%,
+            rgba(
+                138,
+                173,
+                190,
+                .045
+            ) 50%,
+            transparent 50.2%,
+            transparent 74.8%,
+            rgba(
+                138,
+                173,
+                190,
+                .045
+            ) 75%,
+            transparent 75.2%
+        );
+
+}
+
+
+/* =========================================================
+   WALL PANELS
+========================================================= */
+
+.wall-panel {
+
+    position:
+        absolute;
+
+    top:
+        31%;
+
+    z-index:
+        3;
+
+    width:
+        52px;
+
+    height:
+        130px;
+
+    border:
+        1px solid
+        #203b4c;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #111d24,
+            #080f14
+        );
+
+}
+
+
+.wall-panel-left {
+
+    left:
+        18px;
+
+}
+
+
+.wall-panel-right {
+
+    right:
+        18px;
+
+}
+
+
+.wall-panel::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        14px;
+
+    left:
+        10px;
+
+    width:
+        30px;
+
+    height:
+        3px;
+
+    background:
+        #1d455d;
+
+    box-shadow:
+
+        0 13px 0
+        #142c3b,
+
+        0 26px 0
+        #142c3b,
+
+        0 39px 0
+        #142c3b;
+
+}
+
+
+/* =========================================================
+   FLOOR GRID
+========================================================= */
+
+.floor-grid {
+
+    position:
+        absolute;
+
+    left:
+        -10%;
+
+    right:
+        -10%;
+
+    bottom:
+        -16%;
+
+    height:
+        45%;
+
+    transform:
+        perspective(
+            320px
+        )
+        rotateX(
+            58deg
+        );
+
+    transform-origin:
+        center bottom;
+
+    background:
+
+        repeating-linear-gradient(
+            90deg,
+            rgba(
+                94,
+                133,
+                151,
+                .10
+            ) 0,
+            rgba(
+                94,
+                133,
+                151,
+                .10
+            ) 1px,
+            transparent 1px,
+            transparent 42px
+        ),
+
+        repeating-linear-gradient(
+            0deg,
+            rgba(
+                94,
+                133,
+                151,
+                .08
+            ) 0,
+            rgba(
+                94,
+                133,
+                151,
+                .08
+            ) 1px,
+            transparent 1px,
+            transparent 34px
+        );
+
+    opacity:
+        .55;
+
+}
+
+
+/* =========================================================
+   CHAMBER LABEL
+========================================================= */
+
+.chamber-label {
+
+    position:
+        absolute;
+
+    left:
+        16px;
+
+    bottom:
+        14px;
+
+    z-index:
+        6;
+
+    color:
+        #60798a;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        22px;
+
+    letter-spacing:
+        .10em;
+
+}
+
+
+/* =========================================================
+   CHAMBER DATA
+========================================================= */
+
+.chamber-data {
+
+    position:
+        absolute;
+
+    top:
+        52px;
+
+    left:
+        18px;
+
+    z-index:
+        6;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        5px;
+
+    color:
+        #597487;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        20px;
+
+    letter-spacing:
+        .08em;
+
+}
+
+
+/* =========================================================
+   OBSERVATION CAMERA
+========================================================= */
+
+.observation-camera {
+
+    position:
+        absolute;
+
+    top:
+        20px;
+
+    right:
+        20px;
+
+    z-index:
+        7;
+
+    width:
+        32px;
+
+    height:
+        22px;
+
+    border:
+        1px solid
+        #35586d;
+
+    background:
+        #091117;
+
+    box-shadow:
+
+        0 0 10px
+        rgba(
+            76,
+            159,
+            255,
+            .05
+        );
+
+}
+
+
+.camera-lens {
+
+    position:
+        absolute;
+
+    top:
+        5px;
+
+    left:
+        7px;
+
+    width:
+        10px;
+
+    height:
+        10px;
+
+    border:
+        1px solid
+        #57778a;
+
+    border-radius:
+        50%;
+
+    background:
+        #071017;
+
+}
+
+
+.camera-led {
+
+    position:
+        absolute;
+
+    right:
+        4px;
+
+    top:
+        6px;
+
+    width:
+        5px;
+
+    height:
+        5px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--blue);
+
+    box-shadow:
+
+        0 0 7px
+        rgba(
+            76,
+            159,
+            255,
+            .7
+        );
+
+}
+
+
+/* =========================================================
+   MIRA
+========================================================= */
+
+.mira {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    bottom:
+        17%;
+
+    z-index:
+        5;
+
+    width:
+        116px;
+
+    height:
+        230px;
+
+    transform:
+        translateX(-50%);
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(
+                76,
+                159,
+                255,
+                .08
+            )
+        );
+
+}
+
+
+/* =========================================================
+   MIRA GLOW
+========================================================= */
+
+.mira-glow {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        28%;
+
+    width:
+        130px;
+
+    height:
+        180px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+
+        radial-gradient(
+            ellipse,
+            rgba(
+                76,
+                159,
+                255,
+                .10
+            ) 0%,
+            rgba(
+                76,
+                159,
+                255,
+                .035
+            ) 35%,
+            transparent 70%
+        );
+
+    filter:
+        blur(8px);
+
+}
+
+
+/* =========================================================
+   MIRA HEAD
+========================================================= */
+
+.mira-head {
+
+    position:
+        absolute;
+
+    top:
+        12px;
+
+    left:
+        50%;
+
+    width:
+        62px;
+
+    height:
+        68px;
+
+    transform:
+        translateX(-50%);
+
+    border:
+        1px solid
+        #456579;
+
+    border-radius:
+        42% 42% 46% 46%;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #182a35,
+            #0a131a
+        );
+
+    box-shadow:
+
+        inset 0 0 18px
+        rgba(
+            76,
+            159,
+            255,
+            .07
+        );
+
+}
+
+
+.mira-head::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        14px;
+
+    left:
+        50%;
+
+    width:
+        38px;
+
+    height:
+        2px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        #5d8397;
+
+    box-shadow:
+
+        0 12px 0
+        rgba(
+            93,
+            131,
+            151,
+            .45
+        );
+
+}
+
+
+/* =========================================================
+   MIRA BODY
+========================================================= */
+
+.mira-body {
+
+    position:
+        absolute;
+
+    top:
+        73px;
+
+    left:
+        50%;
+
+    width:
+        72px;
+
+    height:
+        108px;
+
+    transform:
+        translateX(-50%);
+
+    border:
+        1px solid
+        #36566a;
+
+    border-radius:
+        22px 22px 12px 12px;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #152630,
+            #091117
+        );
+
+    box-shadow:
+
+        inset 0 0 24px
+        rgba(
+            76,
+            159,
+            255,
+            .055
+        );
+
+}
+
+
+.mira-body::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        28px;
+
+    width:
+        18px;
+
+    height:
+        38px;
+
+    transform:
+        translateX(-50%);
+
+    border:
+        1px solid
+        #31536a;
+
+    background:
+        #0a151c;
+
+    box-shadow:
+
+        0 0 12px
+        rgba(
+            76,
+            159,
+            255,
+            .10
+        );
+
+}
+
+
+/* =========================================================
+   MIRA LEGS
+========================================================= */
+
+.mira-leg {
+
+    position:
+        absolute;
+
+    top:
+        176px;
+
+    width:
+        22px;
+
+    height:
+        48px;
+
+    border:
+        1px solid
+        #304d5e;
+
+    background:
+        #091116;
+
+}
+
+
+.mira-leg.left {
+
+    left:
+        31px;
+
+}
+
+
+.mira-leg.right {
+
+    right:
+        31px;
+
+}
+
+
+/* =========================================================
+   ENVIRONMENT
+========================================================= */
+
+.environment {
+
+    position:
+        absolute;
+
+    right:
+        18px;
+
+    bottom:
+        16px;
+
+    z-index:
+        7;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        20px;
+
+    color:
+        #668092;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        21px;
+
+}
+
+
+.environment b {
+
+    margin-left:
+        5px;
+
+    color:
+        #aec2cf;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        24px;
+
+    font-weight:
+        400;
+
+}
+
+
+/* =========================================================
+   OBSERVATION NOTE
+========================================================= */
+
+.observation-note {
+
+    position:
+        absolute;
+
+    left:
+        18px;
+
+    right:
+        20px;
+
+    bottom:
+        46px;
+
+    z-index:
+        7;
+
+    max-width:
+        58%;
+
+    color:
+        #8198a7;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        22px;
+
+    line-height:
+        1.75;
+
+}
+
+
+/* =========================================================
+   SUBJECT HEADING
+========================================================= */
+
+.subject-heading {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    justify-content:
+        space-between;
+
+    gap:
+        16px;
+
+    padding-bottom:
+        20px;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+}
+
+
+.subject-heading .eyebrow {
+
+    position:
+        static;
+
+    width:
+        auto;
+
+    transform:
+        none;
+
+    color:
+        #60798a;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        22px;
+
+    letter-spacing:
+        .10em;
+
+}
+
+
+.subject-heading h2 {
+
+    margin:
+        8px 0 6px;
+
+    color:
+        #e1edf5;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        54px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        .05em;
+
+    line-height:
+        1;
+
+}
+
+
+.subject-heading p {
+
+    margin:
+        0;
+
+    color:
+        #61798a;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        22px;
+
+    line-height:
+        1.6;
+
+}
+
+
+.state-pill {
+
+    flex-shrink:
+        0;
+
+    margin-top:
+        4px;
+
+    padding:
+        10px 14px;
+
+    border:
+        1px solid
+        #25445a;
+
+    background:
+        #091621;
+
+    color:
+        var(--blue-bright);
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        19px;
+
+    white-space:
+        nowrap;
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stat {
+
+    margin-top:
+        22px;
+
+}
+
+
+.stat-head {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        12px;
+
+    color:
+        #718899;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        22px;
+
+}
+
+
+.stat-head b {
+
+    color:
+        #c2d5df;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        36px;
+
+    font-weight:
+        400;
+
+}
+
+
+.bar {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    height:
+        6px;
+
+    margin-top:
+        8px;
+
+    overflow:
+        hidden;
+
+    background:
+        #101c25;
+
+}
+
+
+.bar i {
+
+    display:
+        block;
+
+    width:
+        0;
+
+    height:
+        100%;
+
+    background:
+        #3f83b5;
+
+    box-shadow:
+
+        0 0 7px
+        rgba(
+            76,
+            159,
+            255,
+            .16
+        );
+
+}
+
+
+/* =========================================================
+   LAST ACTIVITY
+========================================================= */
+
+.last-activity {
+
+    margin-top:
+        28px;
+
+    padding-top:
+        20px;
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+.last-activity .eyebrow {
+
+    position:
+        static;
+
+    width:
+        auto;
+
+    transform:
+        none;
+
+    color:
+        #60798a;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        22px;
+
+}
+
+
+.last-activity .story-text {
+
+    margin-top:
+        10px;
+
+    color:
+        #91a7b4;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        22px;
+
+    line-height:
+        1.8;
+
+}
+
+/* =========================================================
+   NULVA
+   app.css
+   PART 4 / 5
+   ACTION BAR + BOTTOM NAV + MODAL
+========================================================= */
+
+
+/* =========================================================
+   ACTION BAR
+========================================================= */
+
+.action-bar {
+
+    height:
+        116px;
+
+    min-height:
+        116px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            5,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap:
+        1px;
+
+    background:
+        var(--line);
+
+    border-top:
+        1px solid
+        #142737;
+
+}
+
+
+.action-bar button {
+
+    position:
+        relative;
+
+    min-width:
+        0;
+
+    min-height:
+        116px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        10px;
+
+    padding:
+        12px 8px;
+
+    border:
+        0;
+
+    border-right:
+        1px solid
+        #142737;
+
+    background:
+        #071018;
+
+    color:
+        var(--text);
+
+    text-align:
+        center;
+
+    touch-action:
+        manipulation;
+
+}
+
+
+.action-bar button:last-child {
+
+    border-right:
+        0;
+
+}
+
+
+.action-bar button b {
+
+    max-width:
+        100%;
+
+    color:
+        #c7d8e3;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        36px;
+
+    font-weight:
+        400;
+
+    letter-spacing:
+        .08em;
+
+}
+
+
+.action-bar button small {
+
+    color:
+        #60798a;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        21px;
+
+    line-height:
+        1.4;
+
+}
+
+
+.action-bar button:hover {
+
+    background:
+        #0b1823;
+
+}
+
+
+.action-bar button:hover b {
+
+    color:
+        #dcebf4;
+
+}
+
+
+.action-bar button:active {
+
+    background:
+        #102237;
+
+    transform:
+        translateY(1px);
+
+}
+
+
+/* =========================================================
+   BOTTOM NAV
+========================================================= */
+
+.bottom-nav {
+
+    height:
+        64px;
+
+    min-height:
+        64px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        38px;
+
+    padding:
+        0 28px;
+
+    overflow:
+        hidden;
+
+    border-top:
+        1px solid
+        var(--line);
+
+    background:
+        #03070b;
+
+    color:
+        #60798a;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        21px;
+
+    white-space:
+        nowrap;
+
+}
+
+
+.bottom-nav span {
+
+    position:
+        relative;
+
+    flex-shrink:
+        0;
+
+    padding:
+        5px 0;
+
+}
+
+
+.bottom-nav span.active {
+
+    color:
+        var(--blue-bright);
+
+}
+
+
+.bottom-nav span.active::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    bottom:
+        -4px;
+
+    height:
+        1px;
+
+    background:
+        var(--blue);
+
+}
+
+
+.bottom-nav .nav-save {
+
+    margin-left:
+        auto;
+
+    color:
+        #4d6677;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        25px;
+
+    letter-spacing:
+        .08em;
+
+}
+
+
+/* =========================================================
+   MODAL
+   ※ 전체 UI보다 작게 유지
+========================================================= */
+
+.modal {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        900;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        30px;
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            .72
+        );
+
+}
+
+
+/* =========================================================
+   MODAL CARD
+========================================================= */
+
+.modal-card {
+
+    width:
+        760px;
+
+    max-width:
+        72%;
+
+    max-height:
+        78%;
+
+    overflow:
+        auto;
+
+    padding:
+        30px;
+
+    border:
+        1px solid
+        #29465a;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #0b131b,
+            #060b10
+        );
+
+    box-shadow:
+
+        0 18px 60px
+        rgba(
+            0,
+            0,
+            0,
+            .42
+        );
+
+}
+
+
+/* =========================================================
+   MODAL KICKER
+========================================================= */
+
+#modal-kicker {
+
+    color:
+        #60798a;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        16px;
+
+    letter-spacing:
+        .10em;
+
+}
+
+
+/* =========================================================
+   MODAL TITLE
+========================================================= */
+
+#modal-title {
+
+    margin:
+        10px 0 18px;
+
+    color:
+        #dceaf3;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        30px;
+
+    font-weight:
+        400;
+
+    line-height:
+        1.5;
+
+}
+
+
+/* =========================================================
+   MODAL BODY
+========================================================= */
+
+#modal-body {
+
+    color:
+        #9bb0bd;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        15px;
+
+    line-height:
+        1.8;
+
+}
+
+
+#modal-body .story-text {
+
+    margin:
+        0;
+
+    font-size:
+        15px;
+
+    line-height:
+        1.8;
+
+}
+
+
+/* =========================================================
+   MODAL DIVIDER
+========================================================= */
+
+#modal-body hr {
+
+    height:
+        1px;
+
+    margin:
+        20px 0;
+
+    border:
+        0;
+
+    background:
+        var(--line);
+
+}
+
+
+/* =========================================================
+   MODAL ACTIONS
+========================================================= */
+
+.modal-actions {
+
+    display:
+        flex;
+
+    justify-content:
+        flex-end;
+
+    gap:
+        10px;
+
+    margin-top:
+        24px;
+
+}
+
+
+/* =========================================================
+   MODAL BUTTON
+========================================================= */
+
+.modal-actions button {
+
+    min-width:
+        110px;
+
+    min-height:
+        48px;
+
+    padding:
+        11px 20px;
+
+    border:
+        1px solid
+        #27485f;
+
+    background:
+        #091522;
+
+    color:
+        #bcd0dc;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        14px;
+
+}
+
+
+.modal-actions button:hover {
+
+    border-color:
+        #3c6d8d;
+
+    background:
+        #0d1b28;
+
+}
+
+
+.modal-actions button:active {
+
+    background:
+        #102237;
+
+    transform:
+        translateY(1px);
+
+}
+
+
+/* =========================================================
+   MODAL SCROLLBAR
+========================================================= */
+
+.modal-card {
+
+    scrollbar-width:
+        thin;
+
+    scrollbar-color:
+        #1b3447
+        transparent;
+
+}
+
+
+.modal-card::-webkit-scrollbar {
+
+    width:
+        5px;
+
+}
+
+
+.modal-card::-webkit-scrollbar-track {
+
+    background:
+        transparent;
+
+}
+
+
+.modal-card::-webkit-scrollbar-thumb {
+
+    background:
+        #1b3447;
+
+}
+
+
+/* =========================================================
+   TOAST
+   ※ 팝업보다 더 작게
+========================================================= */
+
+.toast {
+
+    position:
+        absolute;
+
+    right:
+        30px;
+
+    bottom:
+        132px;
+
+    z-index:
+        1000;
+
+    max-width:
+        560px;
+
+    padding:
+        12px 18px;
+
+    border:
+        1px solid
+        #27485f;
+
+    background:
+        rgba(
+            5,
+            12,
+            18,
+            .94
+        );
+
+    color:
+        #aec2cf;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        14px;
+
+    line-height:
+        1.6;
+
+}
+
+
+/* =========================================================
+   MODAL CLOSE BUTTON
+========================================================= */
+
+.modal-close {
+
+    position:
+        absolute;
+
+    top:
+        18px;
+
+    right:
+        18px;
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    border:
+        1px solid
+        #27485f;
+
+    background:
+        #09121a;
+
+    color:
+        #7891a2;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        22px;
+
+}
+
+
+.modal-close:hover {
+
+    color:
+        #c9dce7;
+
+    border-color:
+        #3c6d8d;
+
+}
+
+
+/* =========================================================
+   MODAL SMALL LABELS
+========================================================= */
+
+.modal-card .eyebrow {
+
+    color:
+        #60798a;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        16px;
+
+    letter-spacing:
+        .10em;
+
+}
+
+
+.modal-card small {
+
+    color:
+        #60798a;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        13px;
+
+    line-height:
+        1.6;
+
+}
+
+/* =========================================================
+   NULVA
+   app.css
+   PART 5 / 5
+   DAY 01 + FINAL SAFETY + RESPONSIVE
+========================================================= */
+
+
+/* =========================================================
+   DAY 01 INTRO
+========================================================= */
+
+.day-intro {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        800;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        40px;
+
+    background:
+        rgba(
+            3,
+            6,
+            9,
+            .94
+        );
+
+    color:
+        var(--text);
+
+    text-align:
+        center;
+
+    pointer-events:
+        none;
+
+    animation:
+        nulva-day-intro-in
+        .45s
+        ease-out
+        both;
+
+}
+
+
+/* =========================================================
+   DAY 01 SYSTEM TEXT
+========================================================= */
+
+.day-intro-system {
+
+    margin-bottom:
+        24px;
+
+    color:
+        #6b8799;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        34px;
+
+    letter-spacing:
+        .16em;
+
+}
+
+
+/* =========================================================
+   DAY NUMBER
+========================================================= */
+
+.day-intro-day {
+
+    color:
+        #e1edf5;
+
+    font-family:
+        var(--font-logo);
+
+    font-size:
+        172px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        .16em;
+
+    line-height:
+        1;
+
+    transform:
+        translateX(
+            .08em
+        );
+
+    text-shadow:
+
+        0 0 18px
+        rgba(
+            76,
+            159,
+            255,
+            .16
+        ),
+
+        0 0 45px
+        rgba(
+            76,
+            159,
+            255,
+            .06
+        );
+
+}
+
+
+/* =========================================================
+   DAY DATE
+========================================================= */
+
+.day-intro-date {
+
+    margin-top:
+        22px;
+
+    color:
+        #7891a2;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        34px;
+
+    letter-spacing:
+        .12em;
+
+}
+
+
+/* =========================================================
+   DAY KOREAN MESSAGE
+========================================================= */
+
+.day-intro-korean {
+
+    margin-top:
+        34px;
+
+    color:
+        #c0d2dc;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        34px;
+
+    line-height:
+        1.8;
+
+}
+
+
+/* =========================================================
+   DAY SMALL TEXT
+========================================================= */
+
+.day-intro small {
+
+    margin-top:
+        22px;
+
+    color:
+        #60798a;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        22px;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* =========================================================
+   DAY INTRO ANIMATION
+========================================================= */
+
+@keyframes nulva-day-intro-in {
+
+    0% {
+
+        opacity:
+            0;
+
+        filter:
+            blur(3px);
+
+    }
+
+    100% {
+
+        opacity:
+            1;
+
+        filter:
+            blur(0);
+
+    }
+
+}
+
+
+@keyframes nulva-day-intro-out {
+
+    0% {
+
+        opacity:
+            1;
+
+        filter:
+            blur(0);
+
+    }
+
+    100% {
+
+        opacity:
+            0;
+
+        filter:
+            blur(3px);
+
+    }
+
+}
+
+
+.day-intro.leaving {
+
+    animation:
+        nulva-day-intro-out
+        .45s
+        ease-in
+        both;
+
+}
+
+
+/* =========================================================
+   CRT OVERLAY
+========================================================= */
+
+.lab-screen::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        500;
+
+    pointer-events:
+        none;
+
+    background:
+
+        repeating-linear-gradient(
+            0deg,
+            rgba(
+                255,
+                255,
+                255,
+                .012
+            ) 0,
+            rgba(
+                255,
+                255,
+                255,
+                .012
+            ) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    opacity:
+        .32;
+
+}
+
+
+/* =========================================================
+   TEXT RENDERING
+========================================================= */
+
+.boot-lines,
+.boot-logo,
+.researcher-panel,
+.subject-panel,
+.status-panel,
+.action-bar,
+.bottom-nav,
+.modal-card,
+.day-intro {
+
+    text-rendering:
+        geometricPrecision;
+
+}
+
+
+/* =========================================================
+   INPUT TEXT SELECTION
+========================================================= */
+
+#game input,
+#game textarea {
+
+    user-select:
+        text;
+
+    -webkit-user-select:
+        text;
+
+}
+
+
+/* =========================================================
+   IMAGE DRAG PREVENTION
+========================================================= */
+
+#game img {
+
+    -webkit-user-drag:
+        none;
+
+    user-select:
+        none;
+
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+
+    outline:
+        1px solid
+        var(--blue-bright);
+
+    outline-offset:
+        2px;
+
+}
+
+
+/* =========================================================
+   TOUCH LANDSCAPE
+========================================================= */
+
+@media (
+    pointer: coarse
+) and (
+    orientation: landscape
+) {
+
+    .screen {
+
+        width:
+            2340px;
+
+        height:
+            1080px;
+
+        overflow:
+            hidden;
+
+    }
+
+
+    .subject-card {
+
+        min-height:
+            112px;
+
+    }
+
+
+    .subject-card h3 {
+
+        font-size:
+            34px;
+
+    }
+
+
+    .subject-card p {
+
+        font-size:
+            22px;
+
+    }
+
+
+    .subject-heading h2 {
+
+        font-size:
+            54px;
+
+    }
+
+
+    .subject-heading p {
+
+        font-size:
+            22px;
+
+    }
+
+
+    .action-bar button b {
+
+        font-size:
+            36px;
+
+    }
+
+
+    .action-bar button small {
+
+        font-size:
+            21px;
+
+    }
+
+
+    .day-intro-day {
+
+        font-size:
+            172px;
+
+    }
+
+
+    .day-intro-korean {
+
+        font-size:
+            34px;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL DESKTOP WINDOW
+========================================================= */
+
+@media (
+    max-width: 900px
+) and (
+    orientation: landscape
+) {
+
+    .topbar {
+
+        padding-left:
+            22px;
+
+        padding-right:
+            22px;
+
+    }
+
+
+    .top-status {
+
+        gap:
+            18px;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (
+    prefers-reduced-motion: reduce
+) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .01ms !important;
+
+    }
+
+}
+
+
+/* =========================================================
+   FINAL HIDDEN
+========================================================= */
+
+#game .hidden {
+
+    display:
+        none !important;
+
+}
+
+
+/* =========================================================
+   FINAL OVERFLOW
+========================================================= */
+
+html,
+body,
+#game {
+
+    overflow:
+        hidden;
+
+}
+
+
+/* =========================================================
+   FINAL GAME CANVAS
+========================================================= */
+
+.screen {
+
+    width:
+        2340px;
+
+    height:
+        1080px;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        )
+        scale(
+            var(--game-scale)
+        );
+
+}
+
+/* =========================================================
+   END
+========================================================= */
+
+/* =========================================================
+   READY LINE
+   타이핑 중  : 흰색
+   타이핑 완료 후 0.5초 대기
+   그 다음   : 한 번에 초록색
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   타이핑 중
+--------------------------------------------------------- */
+
+#boot-lines > div:nth-child(8) {
+
+    color:
+        #e1edf5;
+
+    text-shadow:
+        none;
+
+}
+
+
+/* ---------------------------------------------------------
+   타이핑 완료
+   JS에서 .typing 클래스가 제거되는 순간
+   이 규칙이 활성화된다.
+--------------------------------------------------------- */
+
+#boot-lines > div:nth-child(8):not(.typing) {
+
+    animation:
+        nulva-ready-green
+        .01s
+        steps(1)
+        .5s
+        forwards;
+
+}
+
+
+/* ---------------------------------------------------------
+   0.5초 대기
+   → 흰색 유지
+   → 순간적으로 초록색
+--------------------------------------------------------- */
+
+@keyframes nulva-ready-green {
+
+    0% {
+
+        color:
+            #e1edf5;
+
+        text-shadow:
+            none;
+
+    }
+
+
+    100% {
+
+        color:
+            #45e889;
+
+        text-shadow:
+
+            0 0 10px
+            rgba(
+                69,
+                232,
+                137,
+                .35
+            ),
+
+            0 0 24px
+            rgba(
+                69,
+                232,
+                137,
+                .12
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   MEMORY ERROR
+========================================================= */
+
+#boot-lines > div:nth-child(6) {
+
+    color:
+        #ff4d5a !important;
+
+    text-shadow:
+
+        0 0 8px
+        rgba(
+            255,
+            77,
+            90,
+            .22
+        );
+
+}
+
+
+/* =========================================================
+   BOOT LOGO
+   기본적으로 숨김
+========================================================= */
+
+#boot-logo {
+
+    opacity:
+        0;
+
+    visibility:
+        hidden;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        )
+        scale(
+            .985
+        );
+
+    filter:
+        blur(2px);
+
+}
+
+
+/* =========================================================
+   LOGO 등장
+   JS에서 .hidden이 제거되면 실행
+========================================================= */
+
+#boot-logo:not(.hidden) {
+
+    visibility:
+        visible;
+
+    animation:
+        nulva-logo-glitch
+        1.15s
+        steps(1)
+        both;
+
+}
+
+
+/* =========================================================
+   GLITCH LOGO
+========================================================= */
+
+@keyframes nulva-logo-glitch {
+
+    /* 완전 암전 */
+
+    0% {
+
+        opacity:
+            0;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(
+                .97
+            );
+
+        filter:
+            blur(8px);
+
+        clip-path:
+            inset(
+                48% 0 48% 0
+            );
+
+    }
+
+
+    /* 첫 신호 */
+
+    8% {
+
+        opacity:
+            .25;
+
+        transform:
+            translate(
+                calc(-50% - 7px),
+                -50%
+            )
+            scale(
+                1.01
+            );
+
+        filter:
+            blur(2px);
+
+        clip-path:
+            inset(
+                20% 0 58% 0
+            );
+
+    }
+
+
+    /* 튀는 순간 */
+
+    13% {
+
+        opacity:
+            .9;
+
+        transform:
+            translate(
+                calc(-50% + 5px),
+                -50%
+            )
+            scale(
+                .995
+            );
+
+        filter:
+            blur(0);
+
+        clip-path:
+            inset(
+                62% 0 18% 0
+            );
+
+    }
+
+
+    18% {
+
+        opacity:
+            .35;
+
+        transform:
+            translate(
+                calc(-50% - 3px),
+                -50%
+            );
+
+        clip-path:
+            inset(
+                10% 0 72% 0
+            );
+
+    }
+
+
+    24% {
+
+        opacity:
+            1;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            );
+
+        filter:
+            blur(0);
+
+        clip-path:
+            inset(
+                0 0 0 0
+            );
+
+    }
+
+
+    /* 짧은 지지직 */
+
+    31% {
+
+        opacity:
+            .55;
+
+        transform:
+            translate(
+                calc(-50% + 2px),
+                -50%
+            );
+
+        clip-path:
+            inset(
+                35% 0 38% 0
+            );
+
+    }
+
+
+    38% {
+
+        opacity:
+            1;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            );
+
+        clip-path:
+            inset(
+                0 0 0 0
+            );
+
+    }
+
+
+    /* 안정화 */
+
+    55% {
+
+        opacity:
+            1;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(
+                1
+            );
+
+        filter:
+            blur(0);
+
+        clip-path:
+            inset(
+                0 0 0 0
+            );
+
+    }
+
+
+    100% {
+
+        opacity:
+            1;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(
+                1
+            );
+
+        filter:
+            blur(0);
+
+        clip-path:
+            inset(
+                0 0 0 0
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   LOGO 자체에도 아주 약한 CRT 흔들림
+========================================================= */
+
+#boot-logo:not(.hidden) h1 {
+
+    animation:
+        nulva-logo-text-glitch
+        1.15s
+        steps(1)
+        both;
+
+}
+
+
+@keyframes nulva-logo-text-glitch {
+
+    0%,
+    18% {
+
+        text-shadow:
+            none;
+
+    }
+
+
+    19% {
+
+        text-shadow:
+
+            -3px 0
+            rgba(
+                255,
+                70,
+                90,
+                .35
+            ),
+
+            3px 0
+            rgba(
+                70,
+                180,
+                255,
+                .35
+            );
+
+    }
+
+
+    23% {
+
+        text-shadow:
+
+            2px 0
+            rgba(
+                255,
+                70,
+                90,
+                .28
+            ),
+
+            -2px 0
+            rgba(
+                70,
+                180,
+                255,
+                .28
+            );
+
+    }
+
+
+    27%,
+    100% {
+
+        text-shadow:
+
+            0 0 12px
+            rgba(
+                76,
+                159,
+                255,
+                .20
+            ),
+
+            0 0 30px
+            rgba(
+                76,
+                159,
+                255,
+                .08
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (
+    prefers-reduced-motion: reduce
+) {
+
+    #boot-logo:not(.hidden) {
+
+        animation:
+            none;
+
+        opacity:
+            1;
+
+        visibility:
+            visible;
+
+    }
+
+}
+
+/* =========================================================
+   PRE-BOOT CURSOR
+========================================================= */
+
+#boot-lines::before {
+
+    content:
+        "█";
+
+    display:
+        inline-block;
+
+    color:
+        #d0dfe7;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        36px;
+
+    animation:
+        nulva-preboot-cursor
+        1.2s
+        steps(1)
+        infinite;
+
+}
+
+
+/* =========================================================
+   PRE-BOOT CURSOR BLINK
+========================================================= */
+
+@keyframes nulva-preboot-cursor {
+
+    0%,
+    35% {
+
+        opacity:
+            1;
+
+    }
+
+    36%,
+    70% {
+
+        opacity:
+            0;
+
+    }
+
+    71%,
+    100% {
+
+        opacity:
+            1;
+
+    }
+
+}
+
+/* =========================================================
+   BOOT START
+   실제 타이핑이 시작되면
+   대기용 커서를 제거한다.
+========================================================= */
+
+#boot-lines.boot-started::before {
+
+    display:
+        none;
+
+}
+
+/* =========================================================
+   RESEARCHER SCREEN ENTRANCE
+   SYSTEM START → 자연스럽게 등장
+========================================================= */
+
+.researcher-screen {
+
+    animation:
+        nulva-researcher-enter
+        .7s
+        ease-out
+        both;
+
+}
+
+
+@keyframes nulva-researcher-enter {
+
+    0% {
+
+        opacity:
+            0;
+
+        filter:
+            blur(
+                5px
+            );
+
+    }
+
+
+    55% {
+
+        opacity:
+            .75;
+
+        filter:
+            blur(
+                2px
+            );
+
+    }
+
+
+    100% {
+
+        opacity:
+            1;
+
+        filter:
+            blur(
+                0
+            );
+
+    }
+
+}
+
+/* =========================================================
+   TOAST
+   최종 수정본
+   - 화면 중앙 하단
+   - 모달보다 훨씬 작게
+   - 짧은 시스템 메시지처럼 표시
+   - 기존 .toast 이름 유지
+========================================================= */
+
+
+/* =========================================================
+   TOAST BASE
+========================================================= */
+
+.toast {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    bottom:
+        148px;
+
+    z-index:
+        1000;
+
+    width:
+        max-content;
+
+    max-width:
+        520px;
+
+    min-width:
+        0;
+
+    box-sizing:
+        border-box;
+
+    padding:
+        11px 20px;
+
+    transform:
+        translateX(-50%)
+        translateY(8px);
+
+    border:
+        1px solid
+        #294b63;
+
+    background:
+        rgba(
+            5,
+            12,
+            18,
+            .94
+        );
+
+    color:
+        #aebfca;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        12px;
+
+    font-weight:
+        400;
+
+    line-height:
+        1.6;
+
+    letter-spacing:
+        0;
+
+    text-align:
+        center;
+
+    white-space:
+        normal;
+
+    word-break:
+        keep-all;
+
+    overflow-wrap:
+        anywhere;
+
+    box-shadow:
+
+        0 0 18px
+        rgba(
+            0,
+            0,
+            0,
+            .28
+        ),
+
+        0 0 12px
+        rgba(
+            76,
+            159,
+            255,
+            .05
+        );
+
+    opacity:
+        0;
+
+    visibility:
+        hidden;
+
+    pointer-events:
+        none;
+
+    transition:
+
+        opacity .18s ease,
+
+        transform .18s ease,
+
+        visibility .18s ease;
+
+}
+
+
+/* =========================================================
+   TOAST SHOW
+========================================================= */
+
+.toast.show {
+
+    opacity:
+        1;
+
+    visibility:
+        visible;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+
+}
+
+
+/* =========================================================
+   TOAST SYSTEM
+========================================================= */
+
+.toast.system {
+
+    border-color:
+        #294b63;
+
+    color:
+        #aebfca;
+
+}
+
+
+/* =========================================================
+   TOAST SUCCESS
+========================================================= */
+
+.toast.success {
+
+    border-color:
+        rgba(
+            69,
+            232,
+            137,
+            .35
+        );
+
+    color:
+        #a9d9ba;
+
+    box-shadow:
+
+        0 0 18px
+        rgba(
+            69,
+            232,
+            137,
+            .06
+        );
+
+}
+
+
+/* =========================================================
+   TOAST WARNING
+========================================================= */
+
+.toast.warning {
+
+    border-color:
+        rgba(
+            196,
+            154,
+            85,
+            .42
+        );
+
+    color:
+        #cbb58b;
+
+}
+
+
+/* =========================================================
+   TOAST DANGER
+========================================================= */
+
+.toast.danger {
+
+    border-color:
+        rgba(
+            168,
+            94,
+            107,
+            .42
+        );
+
+    color:
+        #c99ba4;
+
+}
+
+
+/* =========================================================
+   TOAST ANOMALY
+========================================================= */
+
+.toast.anomaly {
+
+    border-color:
+        rgba(
+            114,
+            201,
+            255,
+            .45
+        );
+
+    color:
+        #b9d9e9;
+
+    box-shadow:
+
+        0 0 20px
+        rgba(
+            76,
+            159,
+            255,
+            .10
+        );
+
+}
+
+
+/* =========================================================
+   TOAST TEXT
+========================================================= */
+
+.toast b {
+
+    color:
+        #d5e5ee;
+
+    font-family:
+        var(--font-korean-pixel);
+
+    font-size:
+        12px;
+
+    font-weight:
+        400;
+
+}
+
+
+/* =========================================================
+   TOAST DIGITAL TEXT
+========================================================= */
+
+.toast .system-code {
+
+    margin-right:
+        8px;
+
+    color:
+        #52758b;
+
+    font-family:
+        var(--font-digital);
+
+    font-size:
+        13px;
+
+    letter-spacing:
+        .06em;
+
+}
+
+
+/* =========================================================
+   TOAST FADE
+========================================================= */
+
+@keyframes nulva-toast-in {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            translateX(-50%)
+            translateY(8px);
+
+    }
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   TOAST MOBILE / SMALL VIEWPORT
+========================================================= */
+
+@media (
+    max-width: 900px
+) {
+
+    .toast {
+
+        bottom:
+            132px;
+
+        max-width:
+            70%;
+
+        padding:
+            10px 16px;
+
+        font-size:
+            11px;
+
+    }
+
+}
+
+
+/* =========================================================
+   TOAST REDUCED MOTION
+========================================================= */
+
+@media (
+    prefers-reduced-motion: reduce
+) {
+
+    .toast {
+
+        transition:
+            none;
+
+    }
+
+}
+
+/* =========================================================
+   NULVA MEMORY WINDOW
+   SUBJECT-001
+========================================================= */
+
+
+/* =========================================================
+   MEMORY OVERLAY
+========================================================= */
+
+.nulva-memory-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 32px;
+
+    background:
+        rgba(0, 5, 10, 0.82);
+
+    backdrop-filter:
+        blur(4px);
+
+    -webkit-backdrop-filter:
+        blur(4px);
+
+}
+
+
+/* =========================================================
+   MEMORY WINDOW
+========================================================= */
+
+.nulva-memory-window {
+
+    position: relative;
+
+    width: min(
+        1100px,
+        92vw
+    );
+
+    height: min(
+        720px,
+        82vh
+    );
+
+    min-height: 420px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(5, 15, 23, 0.98),
+            rgba(2, 9, 15, 0.98)
+        );
+
+    border:
+        1px solid
+        rgba(43, 157, 230, 0.65);
+
+    box-shadow:
+
+        0 0 0 1px
+        rgba(19, 94, 137, 0.18),
+
+        0 0 40px
+        rgba(0, 120, 200, 0.12),
+
+        inset 0 0 40px
+        rgba(0, 100, 160, 0.04);
+
+}
+
+
+/* =========================================================
+   CORNER HUD
+========================================================= */
+
+.nulva-memory-window::before,
+.nulva-memory-window::after {
+
+    content: "";
+
+    position: absolute;
+
+    pointer-events: none;
+
+    z-index: 5;
+
+}
+
+
+/* top-left / bottom-right */
+
+.nulva-memory-window::before {
+
+    inset:
+        0
+        auto
+        auto
+        0;
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    border-top:
+        2px solid
+        #2196dc;
+
+    border-left:
+        2px solid
+        #2196dc;
+
+}
+
+
+/* top-right */
+
+.nulva-memory-window::after {
+
+    top:
+        0;
+
+    right:
+        0;
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    border-top:
+        2px solid
+        #2196dc;
+
+    border-right:
+        2px solid
+        #2196dc;
+
+}
+
+
+/* =========================================================
+   MEMORY HEADER
+========================================================= */
+
+.nulva-memory-header {
+
+    position: relative;
+
+    flex:
+        0 0 82px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 28px;
+
+    border-bottom:
+        1px solid
+        rgba(43, 157, 230, 0.28);
+
+    background:
+        rgba(2, 10, 17, 0.72);
+
+}
+
+
+/* =========================================================
+   MEMORY TITLE
+========================================================= */
+
+.nulva-memory-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap:
+        14px;
+
+    color:
+        #d8edf8;
+
+    font-family:
+        inherit;
+
+    font-size:
+        24px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.18em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* left blue line */
+
+.nulva-memory-title::before {
+
+    content: "";
+
+    display: block;
+
+    width:
+        3px;
+
+    height:
+        30px;
+
+    background:
+        #2196dc;
+
+    box-shadow:
+        0 0 8px
+        rgba(33, 150, 220, 0.5);
+
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.nulva-memory-close {
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        0;
+
+    border:
+        0;
+
+    background:
+        transparent;
+
+    color:
+        #2196dc;
+
+    font-family:
+        inherit;
+
+    font-size:
+        30px;
+
+    font-weight:
+        300;
+
+    line-height:
+        1;
+
+    cursor:
+        pointer;
+
+    transition:
+        color 0.15s ease,
+        text-shadow 0.15s ease,
+        transform 0.15s ease;
+
+}
+
+
+.nulva-memory-close:hover {
+
+    color:
+        #ffffff;
+
+    text-shadow:
+        0 0 12px
+        rgba(33, 150, 220, 0.8);
+
+    transform:
+        scale(1.08);
+
+}
+
+
+/* =========================================================
+   MEMORY CONTENT
+========================================================= */
+
+.nulva-memory-content {
+
+    flex:
+        1 1 auto;
+
+    min-height:
+        0;
+
+    overflow-y:
+        auto;
+
+    overflow-x:
+        hidden;
+
+    padding:
+        0 22px 18px 28px;
+
+    scrollbar-width:
+        thin;
+
+    scrollbar-color:
+        #218ed1
+        rgba(10, 35, 52, 0.8);
+
+}
+
+
+/* =========================================================
+   WEBKIT SCROLLBAR
+========================================================= */
+
+.nulva-memory-content::-webkit-scrollbar {
+
+    width:
+        8px;
+
+}
+
+
+.nulva-memory-content::-webkit-scrollbar-track {
+
+    background:
+        rgba(4, 16, 25, 0.8);
+
+    border-left:
+        1px solid
+        rgba(33, 150, 220, 0.12);
+
+}
+
+
+.nulva-memory-content::-webkit-scrollbar-thumb {
+
+    background:
+        #187fbb;
+
+    border:
+        2px solid
+        rgba(4, 16, 25, 0.8);
+
+}
+
+
+.nulva-memory-content::-webkit-scrollbar-thumb:hover {
+
+    background:
+        #249ee5;
+
+}
+
+
+/* =========================================================
+   MEMORY ENTRY
+========================================================= */
+
+.nulva-memory-entry {
+
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        170px;
+
+    gap:
+        28px;
+
+    padding:
+        28px 8px 26px 14px;
+
+    border-bottom:
+        1px solid
+        rgba(43, 157, 230, 0.18);
+
+}
+
+
+.nulva-memory-entry:last-child {
+
+    border-bottom:
+        none;
+
+}
+
+
+/* =========================================================
+   MEMORY MAIN
+========================================================= */
+
+.nulva-memory-main {
+
+    min-width:
+        0;
+
+}
+
+
+/* =========================================================
+   DAY / TIME
+========================================================= */
+
+.nulva-memory-date {
+
+    margin-bottom:
+        9px;
+
+    color:
+        #279fe8;
+
+    font-family:
+        inherit;
+
+    font-size:
+        13px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+/* =========================================================
+   MEMORY TITLE
+========================================================= */
+
+.nulva-memory-entry-title {
+
+    margin:
+        0 0 10px;
+
+    color:
+        #dcebf3;
+
+    font-family:
+        inherit;
+
+    font-size:
+        21px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        0.04em;
+
+}
+
+
+/* =========================================================
+   MEMORY TEXT
+========================================================= */
+
+.nulva-memory-entry-text {
+
+    margin:
+        0;
+
+    color:
+        rgba(179, 205, 219, 0.88);
+
+    font-family:
+        inherit;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.8;
+
+    word-break:
+        keep-all;
+
+}
+
+
+/* =========================================================
+   MEMORY META
+========================================================= */
+
+.nulva-memory-meta {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-end;
+
+    justify-content:
+        center;
+
+    gap:
+        12px;
+
+}
+
+
+/* =========================================================
+   MEMORY TYPE
+========================================================= */
+
+.nulva-memory-type {
+
+    min-width:
+        108px;
+
+    padding:
+        8px 14px;
+
+    border:
+        1px solid
+        rgba(33, 150, 220, 0.7);
+
+    color:
+        #299ee5;
+
+    background:
+        rgba(10, 55, 82, 0.12);
+
+    font-family:
+        inherit;
+
+    font-size:
+        13px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        0.08em;
+
+    text-align:
+        center;
+
+}
+
+
+/* =========================================================
+   RISK
+========================================================= */
+
+.nulva-memory-entry.is-risk
+.nulva-memory-type {
+
+    border-color:
+        rgba(255, 72, 72, 0.8);
+
+    color:
+        #ff6262;
+
+    background:
+        rgba(150, 20, 20, 0.08);
+
+}
+
+
+/* =========================================================
+   IMPORTANCE
+========================================================= */
+
+.nulva-memory-importance {
+
+    color:
+        rgba(160, 190, 205, 0.9);
+
+    font-family:
+        inherit;
+
+    font-size:
+        12px;
+
+    letter-spacing:
+        0.08em;
+
+    white-space:
+        nowrap;
+
+}
+
+
+.nulva-memory-importance strong {
+
+    margin-left:
+        8px;
+
+    color:
+        #279fe8;
+
+    font-weight:
+        500;
+
+}
+
+
+/* =========================================================
+   EMPTY MEMORY
+========================================================= */
+
+.nulva-memory-empty {
+
+    min-height:
+        360px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        14px;
+
+    color:
+        rgba(160, 190, 205, 0.7);
+
+    text-align:
+        center;
+
+}
+
+
+.nulva-memory-empty-label {
+
+    color:
+        #279fe8;
+
+    font-size:
+        12px;
+
+    letter-spacing:
+        0.14em;
+
+}
+
+
+.nulva-memory-empty-text {
+
+    font-size:
+        14px;
+
+}
+
+
+/* =========================================================
+   MEMORY FOOTER
+========================================================= */
+
+.nulva-memory-footer {
+
+    flex:
+        0 0 44px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        0 24px;
+
+    border-top:
+        1px solid
+        rgba(43, 157, 230, 0.22);
+
+    color:
+        rgba(82, 142, 172, 0.75);
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        0.12em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.nulva-memory-footer-center {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    transform:
+        translateX(-50%);
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (
+    max-width: 760px
+) {
+
+    .nulva-memory-overlay {
+
+        padding:
+            14px;
+
+    }
+
+
+    .nulva-memory-window {
+
+        width:
+            100%;
+
+        height:
+            86vh;
+
+        min-height:
+            360px;
+
+    }
+
+
+    .nulva-memory-header {
+
+        flex-basis:
+            64px;
+
+        padding:
+            0 18px;
+
+    }
+
+
+    .nulva-memory-title {
+
+        font-size:
+            18px;
+
+    }
+
+
+    .nulva-memory-title::before {
+
+        height:
+            24px;
+
+    }
+
+
+    .nulva-memory-content {
+
+        padding:
+            0 14px 12px 18px;
+
+    }
+
+
+    .nulva-memory-entry {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            18px;
+
+        padding:
+            22px 4px;
+
+    }
+
+
+    .nulva-memory-meta {
+
+        flex-direction:
+            row;
+
+        align-items:
+            center;
+
+        justify-content:
+            space-between;
+
+    }
+
+
+    .nulva-memory-entry-title {
+
+        font-size:
+            18px;
+
+    }
+
+
+    .nulva-memory-entry-text {
+
+        font-size:
+            13px;
+
+    }
+
+
+    .nulva-memory-footer {
+
+        display:
+            none;
+
+    }
+
+}
+
+/* =========================================================
+   NULVA OBSERVATION WINDOW
+   SUBJECT-001
+========================================================= */
+
+
+/* =========================================================
+   OBSERVATION OVERLAY
+========================================================= */
+
+.nulva-observation-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9998;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 32px;
+
+    background:
+        rgba(0, 5, 10, 0.82);
+
+    backdrop-filter:
+        blur(4px);
+
+    -webkit-backdrop-filter:
+        blur(4px);
+
+}
+
+
+/* =========================================================
+   OBSERVATION WINDOW
+========================================================= */
+
+.nulva-observation-window {
+
+    position: relative;
+
+    width: min(
+        820px,
+        88vw
+    );
+
+    height: min(
+        560px,
+        76vh
+    );
+
+    min-height:
+        390px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    overflow:
+        hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(5, 15, 23, 0.98),
+            rgba(2, 9, 15, 0.98)
+        );
+
+    border:
+        1px solid
+        rgba(43, 157, 230, 0.65);
+
+    box-shadow:
+
+        0 0 0 1px
+        rgba(19, 94, 137, 0.18),
+
+        0 0 40px
+        rgba(0, 120, 200, 0.12),
+
+        inset 0 0 40px
+        rgba(0, 100, 160, 0.04);
+
+}
+
+
+/* =========================================================
+   CORNER HUD
+========================================================= */
+
+.nulva-observation-window::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 42px;
+
+    height: 42px;
+
+    pointer-events: none;
+
+    z-index: 5;
+
+    border-top:
+        2px solid
+        #2196dc;
+
+    border-left:
+        2px solid
+        #2196dc;
+
+}
+
+
+.nulva-observation-window::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    right: 0;
+
+    width: 42px;
+
+    height: 42px;
+
+    pointer-events: none;
+
+    z-index: 5;
+
+    border-top:
+        2px solid
+        #2196dc;
+
+    border-right:
+        2px solid
+        #2196dc;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.nulva-observation-header {
+
+    position: relative;
+
+    flex:
+        0 0 78px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        0 28px;
+
+    border-bottom:
+        1px solid
+        rgba(43, 157, 230, 0.28);
+
+    background:
+        rgba(2, 10, 17, 0.72);
+
+}
+
+
+/* =========================================================
+   HEADER TITLE
+========================================================= */
+
+.nulva-observation-title {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        14px;
+
+    color:
+        #d8edf8;
+
+    font-size:
+        20px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.16em;
+
+}
+
+
+/* =========================================================
+   BLUE LINE
+========================================================= */
+
+.nulva-observation-title::before {
+
+    content: "";
+
+    display:
+        block;
+
+    width:
+        3px;
+
+    height:
+        28px;
+
+    background:
+        #2196dc;
+
+    box-shadow:
+        0 0 8px
+        rgba(33, 150, 220, 0.5);
+
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+.nulva-observation-close {
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        0;
+
+    border:
+        0;
+
+    background:
+        transparent;
+
+    color:
+        #2196dc;
+
+    font-size:
+        30px;
+
+    font-weight:
+        300;
+
+    line-height:
+        1;
+
+    cursor:
+        pointer;
+
+    transition:
+        color 0.15s ease,
+        text-shadow 0.15s ease,
+        transform 0.15s ease;
+
+}
+
+
+.nulva-observation-close:hover {
+
+    color:
+        #ffffff;
+
+    text-shadow:
+        0 0 12px
+        rgba(33, 150, 220, 0.8);
+
+    transform:
+        scale(1.08);
+
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.nulva-observation-content {
+
+    flex:
+        1 1 auto;
+
+    min-height:
+        0;
+
+    overflow-y:
+        auto;
+
+    padding:
+        42px 48px 30px;
+
+}
+
+
+/* =========================================================
+   KICKER
+========================================================= */
+
+.nulva-observation-kicker {
+
+    margin-bottom:
+        14px;
+
+    color:
+        #279fe8;
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        0.14em;
+
+}
+
+
+/* =========================================================
+   MAIN TITLE
+========================================================= */
+
+.nulva-observation-main-title {
+
+    margin:
+        0 0 30px;
+
+    color:
+        #e1eef5;
+
+    font-size:
+        clamp(
+            28px,
+            4vw,
+            42px
+        );
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        0.06em;
+
+}
+
+
+/* =========================================================
+   OBSERVATION TEXT
+========================================================= */
+
+.nulva-observation-text {
+
+    margin:
+        0 0 24px;
+
+    color:
+        rgba(
+            194,
+            216,
+            228,
+            0.92
+        );
+
+    font-size:
+        15px;
+
+    line-height:
+        2;
+
+    word-break:
+        keep-all;
+
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.nulva-observation-note {
+
+    margin:
+        0 0 30px;
+
+    padding:
+        18px 20px;
+
+    border-left:
+        2px solid
+        rgba(33, 150, 220, 0.6);
+
+    background:
+        rgba(16, 71, 100, 0.08);
+
+    color:
+        rgba(
+            163,
+            195,
+            210,
+            0.82
+        );
+
+    font-size:
+        13px;
+
+    line-height:
+        1.8;
+
+    word-break:
+        keep-all;
+
+}
+
+
+/* =========================================================
+   STATUS AREA
+========================================================= */
+
+.nulva-observation-status {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        14px;
+
+}
+
+
+/* =========================================================
+   STATUS BOX
+========================================================= */
+
+.nulva-observation-status-item {
+
+    padding:
+        15px 18px;
+
+    border:
+        1px solid
+        rgba(43, 157, 230, 0.24);
+
+    background:
+        rgba(4, 20, 30, 0.48);
+
+}
+
+
+/* =========================================================
+   STATUS LABEL
+========================================================= */
+
+.nulva-observation-status-label {
+
+    margin-bottom:
+        7px;
+
+    color:
+        rgba(
+            100,
+            151,
+            178,
+            0.8
+        );
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        0.1em;
+
+}
+
+
+/* =========================================================
+   STATUS VALUE
+========================================================= */
+
+.nulva-observation-status-value {
+
+    color:
+        #279fe8;
+
+    font-size:
+        14px;
+
+    letter-spacing:
+        0.06em;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.nulva-observation-footer {
+
+    flex:
+        0 0 72px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        flex-end;
+
+    padding:
+        0 28px;
+
+    border-top:
+        1px solid
+        rgba(43, 157, 230, 0.22);
+
+    background:
+        rgba(2, 10, 17, 0.72);
+
+}
+
+
+/* =========================================================
+   CONFIRM BUTTON
+========================================================= */
+
+.nulva-observation-confirm {
+
+    min-width:
+        130px;
+
+    height:
+        42px;
+
+    padding:
+        0 22px;
+
+    border:
+        1px solid
+        rgba(43, 157, 230, 0.65);
+
+    background:
+        rgba(10, 55, 82, 0.18);
+
+    color:
+        #d8edf8;
+
+    font-size:
+        12px;
+
+    letter-spacing:
+        0.08em;
+
+    cursor:
+        pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+
+}
+
+
+.nulva-observation-confirm:hover {
+
+    background:
+        rgba(33, 150, 220, 0.16);
+
+    border-color:
+        #279fe8;
+
+    color:
+        #ffffff;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (
+    max-width: 760px
+) {
+
+    .nulva-observation-overlay {
+
+        padding:
+            14px;
+
+    }
+
+
+    .nulva-observation-window {
+
+        width:
+            100%;
+
+        height:
+            86vh;
+
+        min-height:
+            360px;
+
+    }
+
+
+    .nulva-observation-header {
+
+        flex-basis:
+            64px;
+
+        padding:
+            0 18px;
+
+    }
+
+
+    .nulva-observation-title {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .nulva-observation-content {
+
+        padding:
+            30px 24px;
+
+    }
+
+
+    .nulva-observation-main-title {
+
+        font-size:
+            28px;
+
+    }
+
+
+    .nulva-observation-status {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .nulva-observation-footer {
+
+        flex-basis:
+            62px;
+
+        padding:
+            0 18px;
+
+    }
+
+}
+
+/* =========================================================
+   NULVA DAY END WINDOW
+   DAILY RESEARCH TERMINATION
+========================================================= */
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.nulva-dayend-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9998;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 32px;
+
+    background:
+        rgba(0, 5, 10, 0.84);
+
+    backdrop-filter:
+        blur(4px);
+
+    -webkit-backdrop-filter:
+        blur(4px);
+
+}
+
+
+/* =========================================================
+   WINDOW
+========================================================= */
+
+.nulva-dayend-window {
+
+    position: relative;
+
+    width:
+        min(760px, 88vw);
+
+    height:
+        min(500px, 74vh);
+
+    min-height:
+        390px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    overflow:
+        hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(5, 15, 23, 0.98),
+            rgba(2, 9, 15, 0.98)
+        );
+
+    border:
+        1px solid
+        rgba(43, 157, 230, 0.65);
+
+    box-shadow:
+
+        0 0 0 1px
+        rgba(19, 94, 137, 0.18),
+
+        0 0 40px
+        rgba(0, 120, 200, 0.12),
+
+        inset 0 0 40px
+        rgba(0, 100, 160, 0.04);
+
+}
+
+
+/* =========================================================
+   CORNER HUD
+========================================================= */
+
+.nulva-dayend-window::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 42px;
+
+    height: 42px;
+
+    pointer-events: none;
+
+    z-index: 5;
+
+    border-top:
+        2px solid
+        #2196dc;
+
+    border-left:
+        2px solid
+        #2196dc;
+
+}
+
+
+.nulva-dayend-window::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    right: 0;
+
+    width: 42px;
+
+    height: 42px;
+
+    pointer-events: none;
+
+    z-index: 5;
+
+    border-top:
+        2px solid
+        #2196dc;
+
+    border-right:
+        2px solid
+        #2196dc;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.nulva-dayend-header {
+
+    position: relative;
+
+    flex:
+        0 0 76px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        0 28px;
+
+    border-bottom:
+        1px solid
+        rgba(43, 157, 230, 0.28);
+
+    background:
+        rgba(2, 10, 17, 0.72);
+
+}
+
+
+/* =========================================================
+   HEADER TITLE
+========================================================= */
+
+.nulva-dayend-title {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        14px;
+
+    color:
+        #d8edf8;
+
+    font-size:
+        18px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.16em;
+
+}
+
+
+/* =========================================================
+   BLUE INDICATOR
+========================================================= */
+
+.nulva-dayend-title::before {
+
+    content: "";
+
+    display:
+        block;
+
+    width:
+        3px;
+
+    height:
+        27px;
+
+    background:
+        #2196dc;
+
+    box-shadow:
+        0 0 8px
+        rgba(33, 150, 220, 0.5);
+
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+.nulva-dayend-close {
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        0;
+
+    border:
+        0;
+
+    background:
+        transparent;
+
+    color:
+        #2196dc;
+
+    font-size:
+        30px;
+
+    font-weight:
+        300;
+
+    line-height:
+        1;
+
+    cursor:
+        pointer;
+
+    transition:
+        color 0.15s ease,
+        text-shadow 0.15s ease,
+        transform 0.15s ease;
+
+}
+
+
+.nulva-dayend-close:hover {
+
+    color:
+        #ffffff;
+
+    text-shadow:
+        0 0 12px
+        rgba(33, 150, 220, 0.8);
+
+    transform:
+        scale(1.08);
+
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.nulva-dayend-content {
+
+    flex:
+        1 1 auto;
+
+    min-height:
+        0;
+
+    overflow-y:
+        auto;
+
+    padding:
+        44px 48px 34px;
+
+}
+
+
+/* =========================================================
+   KICKER
+========================================================= */
+
+.nulva-dayend-kicker {
+
+    margin-bottom:
+        14px;
+
+    color:
+        #279fe8;
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        0.16em;
+
+}
+
+
+/* =========================================================
+   MAIN TITLE
+========================================================= */
+
+.nulva-dayend-main-title {
+
+    margin:
+        0 0 28px;
+
+    color:
+        #e1eef5;
+
+    font-size:
+        clamp(
+            28px,
+            4vw,
+            40px
+        );
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        0.06em;
+
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.nulva-dayend-description {
+
+    margin:
+        0 0 28px;
+
+    color:
+        rgba(
+            194,
+            216,
+            228,
+            0.9
+        );
+
+    font-size:
+        14px;
+
+    line-height:
+        1.9;
+
+    word-break:
+        keep-all;
+
+}
+
+
+/* =========================================================
+   DATA GRID
+========================================================= */
+
+.nulva-dayend-data {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        14px;
+
+    margin-bottom:
+        28px;
+
+}
+
+
+/* =========================================================
+   DATA ITEM
+========================================================= */
+
+.nulva-dayend-data-item {
+
+    min-height:
+        82px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    justify-content:
+        center;
+
+    padding:
+        16px 20px;
+
+    border:
+        1px solid
+        rgba(43, 157, 230, 0.24);
+
+    background:
+        rgba(4, 20, 30, 0.48);
+
+}
+
+
+/* =========================================================
+   DATA LABEL
+========================================================= */
+
+.nulva-dayend-data-label {
+
+    margin-bottom:
+        8px;
+
+    color:
+        rgba(
+            100,
+            151,
+            178,
+            0.82
+        );
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        0.13em;
+
+}
+
+
+/* =========================================================
+   DATA VALUE
+========================================================= */
+
+.nulva-dayend-data-value {
+
+    color:
+        #d8edf8;
+
+    font-size:
+        15px;
+
+    letter-spacing:
+        0.06em;
+
+    word-break:
+        break-all;
+
+}
+
+
+/* =========================================================
+   NEXT MESSAGE
+========================================================= */
+
+.nulva-dayend-next {
+
+    padding:
+        18px 20px;
+
+    border-left:
+        2px solid
+        rgba(33, 150, 220, 0.62);
+
+    background:
+        rgba(16, 71, 100, 0.08);
+
+    color:
+        rgba(
+            163,
+            195,
+            210,
+            0.82
+        );
+
+    font-size:
+        13px;
+
+    line-height:
+        1.8;
+
+    letter-spacing:
+        0.03em;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.nulva-dayend-footer {
+
+    flex:
+        0 0 72px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        flex-end;
+
+    padding:
+        0 28px;
+
+    border-top:
+        1px solid
+        rgba(43, 157, 230, 0.22);
+
+    background:
+        rgba(2, 10, 17, 0.72);
+
+}
+
+
+/* =========================================================
+   NEXT DAY BUTTON
+========================================================= */
+
+.nulva-dayend-next-button {
+
+    min-width:
+        130px;
+
+    height:
+        42px;
+
+    padding:
+        0 24px;
+
+    border:
+        1px solid
+        rgba(43, 157, 230, 0.65);
+
+    background:
+        rgba(10, 55, 82, 0.18);
+
+    color:
+        #d8edf8;
+
+    font-size:
+        12px;
+
+    letter-spacing:
+        0.08em;
+
+    cursor:
+        pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        box-shadow 0.15s ease;
+
+}
+
+
+.nulva-dayend-next-button:hover {
+
+    background:
+        rgba(33, 150, 220, 0.16);
+
+    border-color:
+        #279fe8;
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 0 14px
+        rgba(33, 150, 220, 0.12);
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.nulva-dayend-content::-webkit-scrollbar {
+
+    width:
+        5px;
+
+}
+
+
+.nulva-dayend-content::-webkit-scrollbar-track {
+
+    background:
+        rgba(0, 0, 0, 0.25);
+
+}
+
+
+.nulva-dayend-content::-webkit-scrollbar-thumb {
+
+    background:
+        rgba(43, 157, 230, 0.38);
+
+}
+
+
+.nulva-dayend-content::-webkit-scrollbar-thumb:hover {
+
+    background:
+        rgba(43, 157, 230, 0.62);
+
+}
+
+
+/* =========================================================
+   MOBILE / SMALL SCREEN
+========================================================= */
+
+@media (
+    max-width: 760px
+) {
+
+    .nulva-dayend-overlay {
+
+        padding:
+            14px;
+
+    }
+
+
+    .nulva-dayend-window {
+
+        width:
+            100%;
+
+        height:
+            86vh;
+
+        min-height:
+            360px;
+
+    }
+
+
+    .nulva-dayend-header {
+
+        flex-basis:
+            64px;
+
+        padding:
+            0 18px;
+
+    }
+
+
+    .nulva-dayend-title {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .nulva-dayend-content {
+
+        padding:
+            30px 24px;
+
+    }
+
+
+    .nulva-dayend-main-title {
+
+        font-size:
+            28px;
+
+    }
+
+
+    .nulva-dayend-data {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .nulva-dayend-footer {
+
+        flex-basis:
+            62px;
+
+        padding:
+            0 18px;
+
+    }
+
+}
+
+/* =========================================================
+   MIRA DAY 02 INTRO EXTENSION
+========================================================= */
+
+
+/* -----------------------------------------
+   DAY 02 DETAIL
+----------------------------------------- */
+
+.mira-day02-intro .day-intro-detail {
+
+    width:
+        min(560px, 80vw);
+
+    margin:
+        18px auto 0;
+
+    color:
+        rgba(
+            185,
+            211,
+            224,
+            0.82
+        );
+
+    font-size:
+        15px;
+
+    line-height:
+        1.8;
+
+    letter-spacing:
+        0.04em;
+
+    text-align:
+        center;
+
+}
+
+
+.mira-day02-intro .day-intro-detail strong {
+
+    color:
+        #d9edf7;
+
+    font-weight:
+        500;
+
+}
+
+
+/* -----------------------------------------
+   FACILITY STATUS
+----------------------------------------- */
+
+.mira-day02-intro .day-intro-status {
+
+    margin-top:
+        16px;
+
+    color:
+        rgba(
+            102,
+            158,
+            187,
+            0.9
+        );
+
+    font-size:
+        15px;
+
+    letter-spacing:
+        0.12em;
+
+    text-align:
+        center;
+
+}
+
+
+.mira-day02-intro .day-intro-status strong {
+
+    color:
+        #55b8ec;
+
+    font-weight:
+        500;
+
+}
+
+
+/* -----------------------------------------
+   START BUTTON
+----------------------------------------- */
+
+.mira-day02-intro .day-intro-button {
+
+    min-width:
+        150px;
+
+    height:
+        44px;
+
+    margin-top:
+        28px;
+
+    padding:
+        0 26px;
+
+    border:
+        1px solid
+        rgba(
+            52,
+            157,
+            215,
+            0.72
+        );
+
+    background:
+        rgba(
+            7,
+            35,
+            53,
+            0.55
+        );
+
+    color:
+        #d8edf8;
+
+    font-family:
+        inherit;
+
+    font-size:
+        12px;
+
+    letter-spacing:
+        0.08em;
+
+    cursor:
+        pointer;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        color 0.18s ease;
+
+}
+
+
+.mira-day02-intro .day-intro-button:hover {
+
+    background:
+        rgba(
+            27,
+            126,
+            181,
+            0.18
+        );
+
+    border-color:
+        #42aee5;
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 0 18px
+        rgba(
+            33,
+            150,
+            220,
+            0.16
+        );
+
+}
+
+
+.mira-day02-intro .day-intro-button:focus-visible {
+
+    outline:
+        1px solid
+        #42aee5;
+
+    outline-offset:
+        4px;
+
+}
+
+
+/* -----------------------------------------
+   DAY 02 SPACING
+----------------------------------------- */
+
+.mira-day02-intro .day-intro-korean {
+
+    margin-bottom:
+        4px;
+
+}
+
+
+.mira-day02-intro .day-intro-date {
+
+    margin-bottom:
+        10px;
+
+}
+
+/* =========================================================
+   MIRA DAY 02 INTRO
+   BUTTON CLICK FIX
+========================================================= */
+
+.mira-day02-intro {
+
+    pointer-events:
+        auto;
+
+    z-index:
+        9999;
+
+}
+
+
+.mira-day02-intro .day-intro-button {
+
+    position:
+        relative;
+
+    z-index:
+        10001;
+
+    pointer-events:
+        auto;
+
+    cursor:
+        pointer;
+
+    user-select:
+        none;
+
+    -webkit-user-select:
+        none;
+
+}
+
+
+/* 혹시 기존 DAY INTRO의
+   pointer-events 설정을 덮어쓴다 */
+
+.mira-day02-intro * {
+
+    pointer-events:
+        auto;
+
+}
+
+/* =========================================================
+   MIRA OBSERVATION WINDOW
+   DAY 02 / FIRST OBSERVATION
+========================================================= */
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.mira-observation-overlay {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        9999;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        24px;
+
+    background:
+        rgba(
+            0,
+            5,
+            10,
+            0.78
+        );
+
+    backdrop-filter:
+        blur(3px);
+
+    -webkit-backdrop-filter:
+        blur(3px);
+
+    pointer-events:
+        auto;
+
+}
+
+
+/* =========================================================
+   WINDOW
+========================================================= */
+
+.mira-observation-window {
+
+    position:
+        relative;
+
+    width:
+        min(
+            680px,
+            82vw
+        );
+
+    max-height:
+        72vh;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    overflow:
+        hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(
+                5,
+                15,
+                23,
+                0.98
+            ),
+            rgba(
+                2,
+                9,
+                15,
+                0.98
+            )
+        );
+
+    border:
+        1px solid
+        rgba(
+            43,
+            157,
+            230,
+            0.58
+        );
+
+    box-shadow:
+
+        0 0 0 1px
+        rgba(
+            19,
+            94,
+            137,
+            0.12
+        ),
+
+        0 0 45px
+        rgba(
+            0,
+            120,
+            200,
+            0.10
+        ),
+
+        inset 0 0 40px
+        rgba(
+            0,
+            100,
+            160,
+            0.035
+        );
+
+}
+
+
+/* =========================================================
+   TOP LEFT CORNER
+========================================================= */
+
+.mira-observation-window::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        -1px;
+
+    left:
+        -1px;
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    border-top:
+        2px solid
+        #2196dc;
+
+    border-left:
+        2px solid
+        #2196dc;
+
+    pointer-events:
+        none;
+
+    z-index:
+        3;
+
+}
+
+
+/* =========================================================
+   TOP RIGHT CORNER
+========================================================= */
+
+.mira-observation-window::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        -1px;
+
+    right:
+        -1px;
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    border-top:
+        2px solid
+        #2196dc;
+
+    border-right:
+        2px solid
+        #2196dc;
+
+    pointer-events:
+        none;
+
+    z-index:
+        3;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.mira-observation-header {
+
+    position:
+        relative;
+
+    flex:
+        0 0 auto;
+
+    min-height:
+        64px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        0 22px 0 28px;
+
+    border-bottom:
+        1px solid
+        rgba(
+            43,
+            157,
+            230,
+            0.24
+        );
+
+    background:
+        rgba(
+            2,
+            10,
+            17,
+            0.72
+        );
+
+}
+
+
+/* =========================================================
+   KICKER
+========================================================= */
+
+.mira-observation-kicker {
+
+    color:
+        #7fb6d2;
+
+    font-size:
+        10px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        0.15em;
+
+    line-height:
+        1.4;
+
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.mira-observation-close {
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    border:
+        0;
+
+    background:
+        transparent;
+
+    color:
+        #4ca8d9;
+
+    font-family:
+        inherit;
+
+    font-size:
+        27px;
+
+    font-weight:
+        300;
+
+    line-height:
+        1;
+
+    cursor:
+        pointer;
+
+    transition:
+        color 0.15s ease,
+        text-shadow 0.15s ease,
+        transform 0.15s ease;
+
+    position:
+        relative;
+
+    z-index:
+        10;
+
+}
+
+
+.mira-observation-close:hover {
+
+    color:
+        #ffffff;
+
+    text-shadow:
+        0 0 12px
+        rgba(
+            33,
+            150,
+            220,
+            0.75
+        );
+
+    transform:
+        scale(1.08);
+
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.mira-observation-content {
+
+    flex:
+        1 1 auto;
+
+    min-height:
+        0;
+
+    overflow-y:
+        auto;
+
+    padding:
+        34px 38px 30px;
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.mira-observation-title {
+
+    margin:
+        0 0 28px;
+
+    color:
+        #dcecf5;
+
+    font-size:
+        clamp(
+            26px,
+            3vw,
+            34px
+        );
+
+    font-weight:
+        500;
+
+    line-height:
+        1.25;
+
+    letter-spacing:
+        0.06em;
+
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.mira-observation-body {
+
+    color:
+        rgba(
+            186,
+            210,
+            222,
+            0.92
+        );
+
+    font-size:
+        14px;
+
+    line-height:
+        1.95;
+
+    letter-spacing:
+        0.025em;
+
+    word-break:
+        keep-all;
+
+}
+
+
+/* =========================================================
+   STORY TEXT
+========================================================= */
+
+.mira-observation-body .story-text {
+
+    margin:
+        0 0 16px;
+
+}
+
+
+/* =========================================================
+   LAST STORY TEXT
+========================================================= */
+
+.mira-observation-body .story-text:last-child {
+
+    margin-bottom:
+        0;
+
+}
+
+
+/* =========================================================
+   STRONG
+========================================================= */
+
+.mira-observation-body strong {
+
+    color:
+        #dceff8;
+
+    font-weight:
+        500;
+
+}
+
+
+/* =========================================================
+   ANOMALY TEXT
+========================================================= */
+
+.mira-observation-body .anomaly-text {
+
+    margin-top:
+        24px;
+
+    padding:
+        14px 16px;
+
+    border-left:
+        2px solid
+        rgba(
+            33,
+            150,
+            220,
+            0.68
+        );
+
+    background:
+        rgba(
+            20,
+            80,
+            110,
+            0.08
+        );
+
+    color:
+        #8ec8e7;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.mira-observation-footer {
+
+    flex:
+        0 0 72px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        flex-end;
+
+    padding:
+        0 28px;
+
+    border-top:
+        1px solid
+        rgba(
+            43,
+            157,
+            230,
+            0.22
+        );
+
+    background:
+        rgba(
+            2,
+            10,
+            17,
+            0.72
+        );
+
+}
+
+
+/* =========================================================
+   CHECK BUTTON
+========================================================= */
+
+.mira-observation-button {
+
+    min-width:
+        148px;
+
+    height:
+        42px;
+
+    padding:
+        0 24px;
+
+    border:
+        1px solid
+        rgba(
+            43,
+            157,
+            230,
+            0.65
+        );
+
+    background:
+        rgba(
+            10,
+            55,
+            82,
+            0.20
+        );
+
+    color:
+        #d8edf8;
+
+    font-family:
+        inherit;
+
+    font-size:
+        11px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        0.08em;
+
+    cursor:
+        pointer;
+
+    pointer-events:
+        auto;
+
+    transition:
+        background 0.16s ease,
+        border-color 0.16s ease,
+        color 0.16s ease,
+        box-shadow 0.16s ease;
+
+}
+
+
+.mira-observation-button:hover {
+
+    background:
+        rgba(
+            33,
+            150,
+            220,
+            0.16
+        );
+
+    border-color:
+        #279fe8;
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 0 16px
+        rgba(
+            33,
+            150,
+            220,
+            0.14
+        );
+
+}
+
+
+.mira-observation-button:focus-visible {
+
+    outline:
+        1px solid
+        #42aee5;
+
+    outline-offset:
+        4px;
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.mira-observation-content::-webkit-scrollbar {
+
+    width:
+        5px;
+
+}
+
+
+.mira-observation-content::-webkit-scrollbar-track {
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.25
+        );
+
+}
+
+
+.mira-observation-content::-webkit-scrollbar-thumb {
+
+    background:
+        rgba(
+            43,
+            157,
+            230,
+            0.38
+        );
+
+}
+
+
+.mira-observation-content::-webkit-scrollbar-thumb:hover {
+
+    background:
+        rgba(
+            43,
+            157,
+            230,
+            0.62
+        );
+
+}
+
+
+/* =========================================================
+   OPEN / CLOSE ANIMATION
+========================================================= */
+
+.mira-observation-overlay {
+
+    opacity:
+        1;
+
+    transition:
+        opacity 0.25s ease;
+
+}
+
+
+.mira-observation-overlay
+.mira-observation-window {
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    opacity:
+        1;
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+
+}
+
+
+.mira-observation-overlay.leaving {
+
+    opacity:
+        0;
+
+}
+
+
+.mira-observation-overlay.leaving
+.mira-observation-window {
+
+    transform:
+        translateY(8px)
+        scale(0.985);
+
+    opacity:
+        0;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (
+    max-width: 760px
+) {
+
+    .mira-observation-overlay {
+
+        padding:
+            14px;
+
+    }
+
+
+    .mira-observation-window {
+
+        width:
+            100%;
+
+        max-height:
+            82vh;
+
+    }
+
+
+    .mira-observation-header {
+
+        min-height:
+            58px;
+
+        padding:
+            0 16px 0 20px;
+
+    }
+
+
+    .mira-observation-content {
+
+        padding:
+            28px 24px 26px;
+
+    }
+
+
+    .mira-observation-title {
+
+        font-size:
+            26px;
+
+        margin-bottom:
+            22px;
+
+    }
+
+
+    .mira-observation-body {
+
+        font-size:
+            13px;
+
+        line-height:
+            1.85;
+
+    }
+
+
+    .mira-observation-footer {
+
+        min-height:
+            64px;
+
+        padding:
+            0 18px;
+
+    }
+
+
+    .mira-observation-button {
+
+        width:
+            100%;
+
+    }
+
+}
+
+/* =========================================================
+   MIRA TIME DISCREPANCY WINDOW
+   DAY 02 / SYSTEM LOG
+========================================================= */
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.mira-discrepancy-overlay {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        9999;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        24px;
+
+    background:
+        rgba(
+            0,
+            5,
+            10,
+            0.78
+        );
+
+    backdrop-filter:
+        blur(3px);
+
+    -webkit-backdrop-filter:
+        blur(3px);
+
+    pointer-events:
+        auto;
+
+    opacity:
+        1;
+
+    transition:
+        opacity 0.25s ease;
+
+}
+
+
+/* =========================================================
+   WINDOW
+========================================================= */
+
+.mira-discrepancy-window {
+
+    position:
+        relative;
+
+    width:
+        min(
+            680px,
+            82vw
+        );
+
+    max-height:
+        72vh;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    overflow:
+        hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(
+                5,
+                15,
+                23,
+                0.98
+            ),
+            rgba(
+                2,
+                9,
+                15,
+                0.98
+            )
+        );
+
+    border:
+        1px solid
+        rgba(
+            43,
+            157,
+            230,
+            0.58
+        );
+
+    box-shadow:
+
+        0 0 0 1px
+        rgba(
+            19,
+            94,
+            137,
+            0.12
+        ),
+
+        0 0 45px
+        rgba(
+            0,
+            120,
+            200,
+            0.10
+        ),
+
+        inset 0 0 40px
+        rgba(
+            0,
+            100,
+            160,
+            0.035
+        );
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    opacity:
+        1;
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+
+}
+
+
+/* =========================================================
+   CORNERS
+========================================================= */
+
+.mira-discrepancy-window::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        -1px;
+
+    left:
+        -1px;
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    border-top:
+        2px solid
+        #2196dc;
+
+    border-left:
+        2px solid
+        #2196dc;
+
+    pointer-events:
+        none;
+
+    z-index:
+        3;
+
+}
+
+
+.mira-discrepancy-window::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        -1px;
+
+    right:
+        -1px;
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    border-top:
+        2px solid
+        #2196dc;
+
+    border-right:
+        2px solid
+        #2196dc;
+
+    pointer-events:
+        none;
+
+    z-index:
+        3;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.mira-discrepancy-header {
+
+    position:
+        relative;
+
+    flex:
+        0 0 auto;
+
+    min-height:
+        64px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        0 22px 0 28px;
+
+    border-bottom:
+        1px solid
+        rgba(
+            43,
+            157,
+            230,
+            0.24
+        );
+
+    background:
+        rgba(
+            2,
+            10,
+            17,
+            0.72
+        );
+
+}
+
+
+/* =========================================================
+   KICKER
+========================================================= */
+
+.mira-discrepancy-kicker {
+
+    color:
+        #7fb6d2;
+
+    font-size:
+        10px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        0.15em;
+
+    line-height:
+        1.4;
+
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+.mira-discrepancy-close {
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        0;
+
+    border:
+        0;
+
+    background:
+        transparent;
+
+    color:
+        #4ca8d9;
+
+    font-family:
+        inherit;
+
+    font-size:
+        27px;
+
+    font-weight:
+        300;
+
+    line-height:
+        1;
+
+    cursor:
+        pointer;
+
+    position:
+        relative;
+
+    z-index:
+        10;
+
+    transition:
+        color 0.15s ease,
+        text-shadow 0.15s ease,
+        transform 0.15s ease;
+
+}
+
+
+.mira-discrepancy-close:hover {
+
+    color:
+        #ffffff;
+
+    text-shadow:
+        0 0 12px
+        rgba(
+            33,
+            150,
+            220,
+            0.75
+        );
+
+    transform:
+        scale(1.08);
+
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.mira-discrepancy-content {
+
+    flex:
+        1 1 auto;
+
+    min-height:
+        0;
+
+    overflow-y:
+        auto;
+
+    padding:
+        34px 38px 30px;
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.mira-discrepancy-title {
+
+    margin:
+        0 0 28px;
+
+    color:
+        #dcecf5;
+
+    font-size:
+        clamp(
+            26px,
+            3vw,
+            34px
+        );
+
+    font-weight:
+        500;
+
+    line-height:
+        1.25;
+
+    letter-spacing:
+        0.06em;
+
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.mira-discrepancy-body {
+
+    color:
+        rgba(
+            186,
+            210,
+            222,
+            0.92
+        );
+
+    font-size:
+        14px;
+
+    line-height:
+        1.95;
+
+    letter-spacing:
+        0.025em;
+
+    word-break:
+        keep-all;
+
+}
+
+
+.mira-discrepancy-body .story-text {
+
+    margin:
+        0 0 16px;
+
+}
+
+
+.mira-discrepancy-body .story-text:last-child {
+
+    margin-bottom:
+        0;
+
+}
+
+
+.mira-discrepancy-body strong {
+
+    color:
+        #dceff8;
+
+    font-weight:
+        500;
+
+}
+
+
+/* =========================================================
+   OBSERVATION STATUS
+========================================================= */
+
+.mira-discrepancy-body .observation-status {
+
+    margin:
+        24px 0 0;
+
+    padding:
+        15px 17px;
+
+    border-left:
+        2px solid
+        rgba(
+            33,
+            150,
+            220,
+            0.72
+        );
+
+    background:
+        rgba(
+            20,
+            80,
+            110,
+            0.08
+        );
+
+    color:
+        #8ec8e7;
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        0.10em;
+
+}
+
+
+.mira-discrepancy-body .observation-status strong {
+
+    color:
+        #55b8ec;
+
+    font-weight:
+        500;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.mira-discrepancy-footer {
+
+    flex:
+        0 0 72px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        flex-end;
+
+    padding:
+        0 28px;
+
+    border-top:
+        1px solid
+        rgba(
+            43,
+            157,
+            230,
+            0.22
+        );
+
+    background:
+        rgba(
+            2,
+            10,
+            17,
+            0.72
+        );
+
+}
+
+
+/* =========================================================
+   ARCHIVE BUTTON
+========================================================= */
+
+.mira-discrepancy-button {
+
+    min-width:
+        148px;
+
+    height:
+        42px;
+
+    padding:
+        0 24px;
+
+    border:
+        1px solid
+        rgba(
+            43,
+            157,
+            230,
+            0.65
+        );
+
+    background:
+        rgba(
+            10,
+            55,
+            82,
+            0.20
+        );
+
+    color:
+        #d8edf8;
+
+    font-family:
+        inherit;
+
+    font-size:
+        11px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        0.08em;
+
+    cursor:
+        pointer;
+
+    pointer-events:
+        auto;
+
+    transition:
+        background 0.16s ease,
+        border-color 0.16s ease,
+        color 0.16s ease,
+        box-shadow 0.16s ease;
+
+}
+
+
+.mira-discrepancy-button:hover {
+
+    background:
+        rgba(
+            33,
+            150,
+            220,
+            0.16
+        );
+
+    border-color:
+        #279fe8;
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 0 16px
+        rgba(
+            33,
+            150,
+            220,
+            0.14
+        );
+
+}
+
+
+.mira-discrepancy-button:disabled {
+
+    opacity:
+        0.55;
+
+    cursor:
+        default;
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.mira-discrepancy-content::-webkit-scrollbar {
+
+    width:
+        5px;
+
+}
+
+
+.mira-discrepancy-content::-webkit-scrollbar-track {
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.25
+        );
+
+}
+
+
+.mira-discrepancy-content::-webkit-scrollbar-thumb {
+
+    background:
+        rgba(
+            43,
+            157,
+            230,
+            0.38
+        );
+
+}
+
+
+.mira-discrepancy-content::-webkit-scrollbar-thumb:hover {
+
+    background:
+        rgba(
+            43,
+            157,
+            230,
+            0.62
+        );
+
+}
+
+
+/* =========================================================
+   LEAVING
+========================================================= */
+
+.mira-discrepancy-overlay.leaving {
+
+    opacity:
+        0;
+
+}
+
+
+.mira-discrepancy-overlay.leaving
+.mira-discrepancy-window {
+
+    transform:
+        translateY(8px)
+        scale(0.985);
+
+    opacity:
+        0;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (
+    max-width: 760px
+) {
+
+    .mira-discrepancy-overlay {
+
+        padding:
+            14px;
+
+    }
+
+
+    .mira-discrepancy-window {
+
+        width:
+            100%;
+
+        max-height:
+            82vh;
+
+    }
+
+
+    .mira-discrepancy-header {
+
+        min-height:
+            58px;
+
+        padding:
+            0 16px 0 20px;
+
+    }
+
+
+    .mira-discrepancy-content {
+
+        padding:
+            28px 24px 26px;
+
+    }
+
+
+    .mira-discrepancy-title {
+
+        font-size:
+            26px;
+
+        margin-bottom:
+            22px;
+
+    }
+
+
+    .mira-discrepancy-body {
+
+        font-size:
+            13px;
+
+        line-height:
+            1.85;
+
+    }
+
+
+    .mira-discrepancy-footer {
+
+        min-height:
+            64px;
+
+        padding:
+            0 18px;
+
+    }
+
+
+    .mira-discrepancy-button {
+
+        width:
+            100%;
+
+    }
+
+}
+
+/* =========================================================
+   MIRA RISK WINDOW
+========================================================= */
+
+.mira-risk-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 24px;
+
+    background:
+        rgba(
+            0,
+            5,
+            10,
+            0.78
+        );
+
+    backdrop-filter:
+        blur(3px);
+
+    -webkit-backdrop-filter:
+        blur(3px);
+
+    pointer-events: auto;
+
+    opacity: 1;
+
+    transition:
+        opacity 0.25s ease;
+
+}
+
+
+.mira-risk-window {
+
+    position: relative;
+
+    width:
+        min(
+            680px,
+            82vw
+        );
+
+    max-height: 72vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(5,15,23,.98),
+            rgba(2,9,15,.98)
+        );
+
+    border:
+        1px solid
+        rgba(
+            43,
+            157,
+            230,
+            0.58
+        );
+
+    box-shadow:
+        0 0 0 1px
+        rgba(19,94,137,.12),
+
+        0 0 45px
+        rgba(0,120,200,.10),
+
+        inset 0 0 40px
+        rgba(0,100,160,.035);
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    opacity: 1;
+
+    transition:
+        transform .25s ease,
+        opacity .25s ease;
+
+}
+
+
+/* -----------------------------------------
+   CORNERS
+----------------------------------------- */
+
+.mira-risk-window::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -1px;
+    left: -1px;
+
+    width: 38px;
+    height: 38px;
+
+    border-top:
+        2px solid
+        #2196dc;
+
+    border-left:
+        2px solid
+        #2196dc;
+
+    pointer-events: none;
+
+}
+
+
+.mira-risk-window::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: -1px;
+    right: -1px;
+
+    width: 38px;
+    height: 38px;
+
+    border-top:
+        2px solid
+        #2196dc;
+
+    border-right:
+        2px solid
+        #2196dc;
+
+    pointer-events: none;
+
+}
+
+
+/* -----------------------------------------
+   HEADER
+----------------------------------------- */
+
+.mira-risk-header {
+
+    min-height: 64px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 22px 0 28px;
+
+    border-bottom:
+        1px solid
+        rgba(43,157,230,.24);
+
+    background:
+        rgba(2,10,17,.72);
+
+}
+
+
+.mira-risk-kicker {
+
+    color:
+        #7fb6d2;
+
+    font-size: 10px;
+
+    letter-spacing:
+        .15em;
+
+}
+
+
+/* -----------------------------------------
+   CLOSE
+----------------------------------------- */
+
+.mira-risk-close {
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color:
+        #4ca8d9;
+
+    font-family: inherit;
+
+    font-size: 27px;
+
+    font-weight: 300;
+
+    cursor: pointer;
+
+    transition:
+        color .15s ease,
+        text-shadow .15s ease,
+        transform .15s ease;
+
+}
+
+
+.mira-risk-close:hover {
+
+    color: #ffffff;
+
+    text-shadow:
+        0 0 12px
+        rgba(33,150,220,.75);
+
+    transform:
+        scale(1.08);
+
+}
+
+
+/* -----------------------------------------
+   CONTENT
+----------------------------------------- */
+
+.mira-risk-content {
+
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    padding:
+        34px 38px 30px;
+
+}
+
+
+.mira-risk-title {
+
+    margin:
+        0 0 28px;
+
+    color:
+        #dcecf5;
+
+    font-size:
+        clamp(
+            26px,
+            3vw,
+            34px
+        );
+
+    font-weight: 500;
+
+    line-height: 1.25;
+
+    letter-spacing:
+        .06em;
+
+}
+
+
+.mira-risk-body {
+
+    color:
+        rgba(
+            186,
+            210,
+            222,
+            .92
+        );
+
+    font-size: 14px;
+
+    line-height: 1.95;
+
+    letter-spacing:
+        .025em;
+
+    word-break:
+        keep-all;
+
+}
+
+
+.mira-risk-body .story-text {
+
+    margin:
+        0 0 16px;
+
+}
+
+
+.mira-risk-body strong {
+
+    color:
+        #dceff8;
+
+    font-weight: 500;
+
+}
+
+
+.mira-risk-body .observation-status {
+
+    margin-top: 24px;
+
+    padding:
+        15px 17px;
+
+    border-left:
+        2px solid
+        rgba(
+            33,
+            150,
+            220,
+            .72
+        );
+
+    background:
+        rgba(
+            20,
+            80,
+            110,
+            .08
+        );
+
+    color:
+        #8ec8e7;
+
+    font-size: 11px;
+
+    letter-spacing:
+        .10em;
+
+}
+
+
+.mira-risk-body .observation-status strong {
+
+    color:
+        #55b8ec;
+
+}
+
+
+/* -----------------------------------------
+   FOOTER
+----------------------------------------- */
+
+.mira-risk-footer {
+
+    flex:
+        0 0 72px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    padding:
+        0 28px;
+
+    border-top:
+        1px solid
+        rgba(43,157,230,.22);
+
+    background:
+        rgba(2,10,17,.72);
+
+}
+
+
+/* -----------------------------------------
+   BUTTON
+----------------------------------------- */
+
+.mira-risk-button {
+
+    min-width: 148px;
+
+    height: 42px;
+
+    padding:
+        0 24px;
+
+    border:
+        1px solid
+        rgba(43,157,230,.65);
+
+    background:
+        rgba(10,55,82,.20);
+
+    color:
+        #d8edf8;
+
+    font-family:
+        inherit;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    letter-spacing:
+        .08em;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    transition:
+        background .16s ease,
+        border-color .16s ease,
+        color .16s ease,
+        box-shadow .16s ease;
+
+}
+
+
+.mira-risk-button:hover {
+
+    background:
+        rgba(33,150,220,.16);
+
+    border-color:
+        #279fe8;
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 0 16px
+        rgba(33,150,220,.14);
+
+}
+
+
+/* -----------------------------------------
+   LEAVING
+----------------------------------------- */
+
+.mira-risk-overlay.leaving {
+
+    opacity: 0;
+
+}
+
+
+.mira-risk-overlay.leaving
+.mira-risk-window {
+
+    transform:
+        translateY(8px)
+        scale(.985);
+
+    opacity: 0;
+
+}
+
+
+/* -----------------------------------------
+   MOBILE
+----------------------------------------- */
+
+@media (
+    max-width: 760px
+) {
+
+    .mira-risk-overlay {
+
+        padding: 14px;
+
+    }
+
+
+    .mira-risk-window {
+
+        width: 100%;
+
+        max-height: 82vh;
+
+    }
+
+
+    .mira-risk-content {
+
+        padding:
+            28px 24px 26px;
+
+    }
+
+
+    .mira-risk-footer {
+
+        min-height: 64px;
+
+        padding:
+            0 18px;
+
+    }
+
+
+    .mira-risk-button {
+
+        width: 100%;
+
+    }
+
+}
+
