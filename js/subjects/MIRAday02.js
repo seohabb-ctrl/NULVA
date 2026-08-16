@@ -251,6 +251,7 @@ function startMIRADay02() {
     gameState.facilityStatus =
         "NORMAL";
 
+    renderStatus();
 
     /*
         연구 기록

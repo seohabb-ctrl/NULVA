@@ -2226,6 +2226,10 @@ function setupBoot() {
 
 function setupResearcherInput() {
 
+    /*
+        CONFIRM
+    */
+
     $("#researcher-confirm")
         ?.addEventListener(
 
@@ -2235,6 +2239,10 @@ function setupResearcherInput() {
 
         );
 
+
+    /*
+        ENTER
+    */
 
     $("#researcher-id")
         ?.addEventListener(
@@ -2255,9 +2263,482 @@ function setupResearcherInput() {
 
         );
 
+
+    /*
+        SIGN UP
+    */
+
+    $("#researcher-signup")
+        ?.addEventListener(
+
+            "click",
+
+            openResearcherSignup
+
+        );
+
 }
 
+/* =========================================
+   RESEARCHER SIGN UP
+========================================= */
 
+function openResearcherSignup() {
+
+    /*
+        이미 SIGN UP 창이 열려 있으면
+        새로 만들지 않는다.
+    */
+
+    const existingSignup =
+        document.querySelector(
+            ".nulva-signup-overlay"
+        );
+
+    if (existingSignup) {
+        return;
+    }
+
+
+    /*
+        OVERLAY
+    */
+
+    const overlay =
+        document.createElement(
+            "div"
+        );
+
+
+    overlay.className =
+        "nulva-signup-overlay";
+
+
+    /*
+        WINDOW
+    */
+
+    overlay.innerHTML = `
+
+        <div
+            class="nulva-signup-window"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="nulva-signup-title"
+        >
+
+
+            <div class="nulva-signup-header">
+
+
+                <div class="nulva-signup-system">
+
+                    NULVA INTERNAL SYSTEM
+
+                </div>
+
+
+                <div class="nulva-signup-status">
+
+                    PERSONNEL REGISTRATION
+
+                </div>
+
+
+            </div>
+
+
+            <div class="nulva-signup-content">
+
+
+                <div class="nulva-signup-kicker">
+
+                    RESEARCHER REGISTRATION
+
+                </div>
+
+
+                <h2 id="nulva-signup-title">
+
+                    연구원 등록
+
+                </h2>
+
+
+                <p>
+
+                    신규 연구원 정보를 등록합니다.
+
+                </p>
+
+
+                <div class="nulva-signup-field">
+
+
+                    <label
+                        for="signup-name"
+                    >
+
+                        RESEARCHER NAME
+
+                    </label>
+
+
+                    <input
+                        id="signup-name"
+                        type="text"
+                        maxlength="24"
+                        autocomplete="off"
+                        placeholder="RESEARCHER NAME"
+                    >
+
+                </div>
+
+
+                <div class="nulva-signup-field">
+
+
+                    <label
+                        for="signup-id"
+                    >
+
+                        RESEARCHER ID
+
+                    </label>
+
+
+                    <input
+                        id="signup-id"
+                        type="text"
+                        maxlength="18"
+                        autocomplete="off"
+                        placeholder="RESEARCHER ID"
+                    >
+
+                </div>
+
+
+                <div class="nulva-signup-notice">
+
+                    등록된 정보는
+                    연구 및 실험체 관리 기록에 사용됩니다.
+
+                </div>
+
+
+            </div>
+
+
+            <div class="nulva-signup-actions">
+
+
+                <button
+                    type="button"
+                    class="nulva-signup-cancel"
+                    id="nulva-signup-cancel"
+                >
+
+                    CANCEL
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nulva-signup-submit"
+                    id="nulva-signup-submit"
+                >
+
+                    REGISTER
+
+                </button>
+
+
+            </div>
+
+
+            <div class="nulva-signup-footer">
+
+                <span>
+
+                    NULVA PERSONNEL SYSTEM
+
+                </span>
+
+
+                <span>
+
+                    AUTHORIZATION REQUIRED
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+    `;
+
+
+    /*
+        연구원 화면 위에 표시
+    */
+
+    const researcherScreen =
+        document.querySelector(
+            "#researcher-screen"
+        );
+
+
+    if (!researcherScreen) {
+
+        console.error(
+            "NULVA: #researcher-screen을 찾을 수 없습니다."
+        );
+
+        return;
+
+    }
+
+
+    researcherScreen.appendChild(
+        overlay
+    );
+
+
+    /*
+        ELEMENTS
+    */
+
+    const nameInput =
+        overlay.querySelector(
+            "#signup-name"
+        );
+
+
+    const idInput =
+        overlay.querySelector(
+            "#signup-id"
+        );
+
+
+    const cancelButton =
+        overlay.querySelector(
+            "#nulva-signup-cancel"
+        );
+
+
+    const submitButton =
+        overlay.querySelector(
+            "#nulva-signup-submit"
+        );
+
+
+    /*
+        CANCEL
+    */
+
+    cancelButton?.addEventListener(
+
+        "click",
+
+        function () {
+
+            closeResearcherSignup();
+
+        }
+
+    );
+
+
+    /*
+        REGISTER
+    */
+
+    submitButton?.addEventListener(
+
+        "click",
+
+        function () {
+
+            const name =
+                nameInput.value.trim();
+
+
+            const id =
+                idInput.value.trim();
+
+
+            /*
+                이름 확인
+            */
+
+            if (!name) {
+
+                nameInput.focus();
+
+                showToast(
+                    "RESEARCHER NAME REQUIRED"
+                );
+
+                return;
+
+            }
+
+
+            /*
+                ID 확인
+            */
+
+            if (!id) {
+
+                idInput.focus();
+
+                showToast(
+                    "RESEARCHER ID REQUIRED"
+                );
+
+                return;
+
+            }
+
+
+            /*
+                현재 연구원 입력창에
+                ID를 자동으로 넣는다.
+            */
+
+            $("#researcher-id")
+                .value =
+                id.toUpperCase();
+
+
+            /*
+                등록 완료
+            */
+
+            closeResearcherSignup();
+
+
+            showToast(
+                `PERSONNEL REGISTERED · ${name}`
+            );
+
+
+            /*
+                잠시 후
+                기존 CONFIRM 버튼으로
+                인증을 진행할 수 있다.
+            */
+
+        }
+
+    );
+
+
+    /*
+        ENTER
+    */
+
+    idInput?.addEventListener(
+
+        "keydown",
+
+        function (event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                submitButton.click();
+
+            }
+
+        }
+
+    );
+
+
+    /*
+        ESC
+    */
+
+    function handleEscape(
+        event
+    ) {
+
+        if (
+            event.key !== "Escape"
+        ) {
+
+            return;
+
+        }
+
+
+        closeResearcherSignup();
+
+
+        document.removeEventListener(
+            "keydown",
+            handleEscape
+        );
+
+    }
+
+
+    document.addEventListener(
+        "keydown",
+        handleEscape
+    );
+
+
+    /*
+        CLOSE
+    */
+
+    function closeResearcherSignup() {
+
+        overlay.classList.add(
+            "leaving"
+        );
+
+
+        setTimeout(
+
+            function () {
+
+                overlay.remove();
+
+                document.removeEventListener(
+                    "keydown",
+                    handleEscape
+                );
+
+            },
+
+            220
+
+        );
+
+    }
+
+
+    /*
+        FOCUS
+    */
+
+    requestAnimationFrame(
+
+        function () {
+
+            nameInput?.focus();
+
+        }
+
+    );
+
+}
 
 /* =========================================
    INITIALIZE
